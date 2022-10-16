@@ -5,7 +5,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   selector: 'uwmh-nx-welcome',
   template: `
     <div class="flex h-screen">
-      <div class="m-auto flex flex-col">
+      <div class="m-auto w-1/2 justify-between flex items-center">
         <mat-card>
           <mat-card-title>Login</mat-card-title>
           <mat-card-content>
@@ -20,6 +20,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
             <button mat-raised-button>login</button>
           </mat-card-content>
         </mat-card>
+        <button mat-raised-button>login</button>
       </div>
     </div>
   `,
