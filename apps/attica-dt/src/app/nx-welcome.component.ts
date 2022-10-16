@@ -432,7 +432,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
         <!--  WELCOME  -->
         <div id="welcome">
           <h1>
-            <span> Hello there, </span>
+            <span class="text-red-500"> Hello there, </span>
             Welcome attica-dt 👋
           </h1>
         </div>
