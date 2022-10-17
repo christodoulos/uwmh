@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@uwmh/material": ["libs/material/src/index.ts"]
+      "@uwmh/material": ["libs/material/src/index.ts"],
+      "@uwmh/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
