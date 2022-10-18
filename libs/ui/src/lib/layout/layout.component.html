@@ -1,2 +1,36 @@
-<uwmh-topbar></uwmh-topbar>
-<router-outlet></router-outlet>
+<mat-toolbar class="mat-elevation-z8">
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  Attica Digital Twin
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="content mat-elevation-z8">
+    <img class="avatar" src="/assets/logo.png" />
+
+    <mat-nav-list>
+      <h4 matSubheader>Attica Region</h4>
+      <a mat-list-item>Link 1</a>
+      <a mat-list-item>Link 2</a>
+      <a mat-list-item>Link 3</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <h4 matSubheader>Plant Nursery</h4>
+      <a mat-list-item>Link 1</a>
+      <a mat-list-item>Link 2</a>
+      <a mat-list-item>Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
