@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Map } from 'mapbox-gl';
 
 @Component({
   selector: 'uwmh-attica-region',

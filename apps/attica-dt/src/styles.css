@@ -1,4 +1,5 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~mapbox-gl/dist/mapbox-gl.css';
 
 @tailwind base;
 @tailwind components;
@@ -12,4 +13,11 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  flex-grow: 1;
+}
+
+mgl-map {
+  width: calc(100vh-200px);
+  /* height: 600px; */
+  height: 100%;
 }
