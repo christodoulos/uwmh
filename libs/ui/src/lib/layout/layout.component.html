@@ -11,12 +11,12 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav="matSidenav" class="content mat-elevation-z8">
+  <mat-sidenav #sidenav="matSidenav" class="content">
     <img class="avatar" src="/assets/logo.png" />
 
     <mat-nav-list>
       <h4 matSubheader>Attica Region</h4>
-      <a mat-list-item>Link 1</a>
+      <a mat-list-item routerLink="">Display on Map</a>
       <a mat-list-item>Link 2</a>
       <a mat-list-item>Link 3</a>
     </mat-nav-list>
@@ -29,7 +29,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="content mat-elevation-z8">
+    <div class="content">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
