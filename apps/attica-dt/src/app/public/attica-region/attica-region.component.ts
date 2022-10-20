@@ -12,6 +12,7 @@ export class AtticaRegionComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+    console.log('skata');
     this.http.get<geojson.Feature[]>('/api/location').subscribe({
       next: (data) => {
         console.log(data);
