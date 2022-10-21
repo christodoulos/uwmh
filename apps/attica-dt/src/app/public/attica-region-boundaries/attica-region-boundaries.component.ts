@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import * as geojson from 'geojson';
 
 @Component({
-  selector: 'uwmh-attica-region',
-  templateUrl: './attica-region.component.html',
-  styleUrls: ['./attica-region.component.css'],
+  selector: 'uwmh-attica-region-boundaries',
+  templateUrl: './attica-region-boundaries.component.html',
+  styleUrls: ['./attica-region-boundaries.component.css'],
 })
-export class AtticaRegionComponent implements OnInit {
+export class AtticaRegionBoundariesComponent implements OnInit {
   data: geojson.Feature | undefined;
   constructor(private http: HttpClient) {}
 

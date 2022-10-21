@@ -4,10 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 import { PublicRoutingModule } from './public-routing.module';
-import { AtticaRegionComponent } from './attica-region/attica-region.component';
+import { AtticaRegionBoundariesComponent } from './attica-region-boundaries/attica-region-boundaries.component';
+import { AtticaRegionRiversComponent } from './attica-region-rivers/attica-region-rivers.component';
 
 @NgModule({
-  declarations: [AtticaRegionComponent],
+  declarations: [AtticaRegionBoundariesComponent, AtticaRegionRiversComponent],
   imports: [
     CommonModule,
     HttpClientModule,

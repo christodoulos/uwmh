@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z8">
+<mat-toolbar>
   <button
     mat-icon-button
     *ngIf="sidenav.mode === 'over'"
@@ -16,8 +16,8 @@
 
     <mat-nav-list>
       <h4 matSubheader>Attica Region</h4>
-      <a mat-list-item routerLink="">Display on Map</a>
-      <a mat-list-item>Link 2</a>
+      <a mat-list-item routerLink="boundaries">Display Boundaries</a>
+      <a mat-list-item routerLink="rivers">Display Rivers</a>
       <a mat-list-item>Link 3</a>
     </mat-nav-list>
     <mat-divider></mat-divider>
