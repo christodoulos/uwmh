@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'uwmh-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  template: '<uwmh-layout></uwmh-layout>',
 })
-export class AppComponent {
-  title = 'attica-dt';
-}
+export class AppComponent {}

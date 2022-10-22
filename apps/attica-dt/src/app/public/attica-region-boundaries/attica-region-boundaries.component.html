@@ -1,11 +1,13 @@
-<!-- prettier-ignore -->
 <!-- <mgl-map
   [style]="'mapbox://styles/mapbox/streets-v11'"
-  [zoom]="[7]"
-  [center]="[23.530636, 37.218564]"
+  [fitBounds]="[
+    [24.116494, 38.340999],
+    [22.890434, 35.823757]
+  ]"
 >
-<mgl-control mglNavigation></mgl-control>
-<mgl-control mglFullscreen></mgl-control>
+  <mgl-control mglNavigation></mgl-control>
+  <mgl-control mglFullscreen></mgl-control>
+  <mgl-control mglScale></mgl-control>
   <mgl-layer
     id="attica region"
     type="line"
@@ -18,9 +20,9 @@
       'line-cap': 'round'
     }"
     [paint]="{
-      'line-color': '#f00',
-      'line-width': 1
+      'line-color': '#000',
+      'line-width': 2
     }"
   ></mgl-layer>
 </mgl-map> -->
-<p>Attica Region Works!</p>
+<p>Boundaries works!</p>

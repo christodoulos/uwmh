@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as geojson from 'geojson';
 
 @Component({
   selector: 'uwmh-attica-region-rivers',
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./attica-region-rivers.component.css'],
 })
 export class AtticaRegionRiversComponent implements OnInit {
-  constructor() {}
+  features: geojson.Feature[] = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const layerKeys = ['Feature-AtticaRegion'];
+    for (const key of layerKeys) {
+      const featureStr = localStorage.getItem(key);
+      if (featureStr) {
+        const feature = JSON.parse(featureStr) as unknown as geojson.Feature;
+        this.features.push(feature);
+      }
+    }
+    console.log('GGGGGGGGGGGG', this.features);
+  }
 }
