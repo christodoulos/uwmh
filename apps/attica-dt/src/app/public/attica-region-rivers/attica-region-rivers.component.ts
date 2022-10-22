@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as geojson from 'geojson';
+import { BoundariesEffects, BoundariesRepository } from '@uwmh/state';
+import { dispatch } from '@ngneat/effects';
 
 @Component({
   selector: 'uwmh-attica-region-rivers',
@@ -7,17 +8,15 @@ import * as geojson from 'geojson';
   styleUrls: ['./attica-region-rivers.component.css'],
 })
 export class AtticaRegionRiversComponent implements OnInit {
-  features: geojson.Feature[] = [];
+  loadAtticaRegionAction = this.effects.loadAtticaRegionAction;
+  attica$ = this.repo.attica_region$;
+  dispatch = dispatch;
+  constructor(
+    private repo: BoundariesRepository,
+    private effects: BoundariesEffects
+  ) {}
 
   ngOnInit(): void {
-    const layerKeys = ['Feature-AtticaRegion'];
-    for (const key of layerKeys) {
-      const featureStr = localStorage.getItem(key);
-      if (featureStr) {
-        const feature = JSON.parse(featureStr) as unknown as geojson.Feature;
-        this.features.push(feature);
-      }
-    }
-    console.log('GGGGGGGGGGGG', this.features);
+    this.dispatch(this.loadAtticaRegionAction());
   }
 }
