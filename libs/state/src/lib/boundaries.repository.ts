@@ -12,6 +12,11 @@ import * as geojson from 'geojson';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs';
 
+interface MultiBoundary {
+  desc: string;
+  geojson: geojson.Feature;
+}
+
 interface Boundaries {
   attica_region: geojson.Feature;
 }
@@ -56,10 +61,12 @@ export class BoundariesEffects {
   loadAtticaRegionActionEffect$ = createEffect((actions$) =>
     actions$.pipe(
       ofType(this.loadAtticaRegionAction),
-      map(() => this.http.get<geojson.Feature[]>('/api/location')),
+      map(() =>
+        this.http.get<MultiBoundary>('/api/multiboundary/attica_region')
+      ),
       tap((response) => {
         const subscription = response.subscribe((res) => {
-          if (res.length) this.boundaries.updateBoundary(res[0]);
+          this.boundaries.updateBoundary(res.geojson);
           subscription.unsubscribe();
         });
       })

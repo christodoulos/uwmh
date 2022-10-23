@@ -3,11 +3,7 @@ import { LocationService } from './location.service';
 
 @Controller('location')
 export class LocationController {
-  constructor(private readonly service: LocationService) {
-    this.service.findAll().then((data) => {
-      console.log(data);
-    });
-  }
+  constructor(private readonly service: LocationService) {}
 
   @Get()
   async findAllLocations() {
