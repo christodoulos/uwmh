@@ -21,7 +21,7 @@ interface Boundaries {
   attica_region: geojson.Feature;
 }
 
-const InitBoundary: geojson.Feature = {
+export const InitBoundary: geojson.Feature = {
   type: 'Feature',
   geometry: {
     type: 'Point',
@@ -39,7 +39,7 @@ const { state, config } = createState(
 const store = new Store({ state, name: 'boundaries', config });
 
 @Injectable({ providedIn: 'root' })
-export class BoundariesRepository {
+export class BoundaryRepository {
   attica_region$ = store.pipe(select((state) => state.attica_region));
 
   updateBoundary(boundary: geojson.Feature) {
@@ -48,9 +48,9 @@ export class BoundariesRepository {
 }
 
 @Injectable({ providedIn: 'root' })
-export class BoundariesEffects {
+export class BoundaryEffects {
   constructor(
-    private boundaries: BoundariesRepository,
+    private boundaries: BoundaryRepository,
     private http: HttpClient
   ) {}
 

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { MapboxModule } from '@uwmh/mapbox';
 
-import { AtticaRegionBoundariesComponent } from './attica-region-boundaries/attica-region-boundaries.component';
+import { AtticaRegionBoundaryComponent } from './attica-region-boundary/attica-region-boundary.component';
 import { AtticaRegionRiversComponent } from './attica-region-rivers/attica-region-rivers.component';
 
 @NgModule({
@@ -13,12 +13,12 @@ import { AtticaRegionRiversComponent } from './attica-region-rivers/attica-regio
     CommonModule,
     HttpClientModule,
     RouterModule.forChild([
-      { path: 'boundaries', component: AtticaRegionBoundariesComponent },
+      { path: 'boundaries', component: AtticaRegionBoundaryComponent },
       { path: 'rivers', component: AtticaRegionRiversComponent },
-      { path: '', component: AtticaRegionBoundariesComponent },
+      { path: '', component: AtticaRegionBoundaryComponent },
     ]),
     MapboxModule,
   ],
-  declarations: [AtticaRegionBoundariesComponent, AtticaRegionRiversComponent],
+  declarations: [AtticaRegionBoundaryComponent, AtticaRegionRiversComponent],
 })
 export class PublicModule {}

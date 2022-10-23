@@ -1,19 +1,21 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
+  ViewChild,
 } from '@angular/core';
-import { LngLatBoundsLike, LngLatLike } from 'mapbox-gl';
+import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
 import * as geojson from 'geojson';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'uwmh-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent implements OnInit {
+export class MapComponent {
   // map related inputs
   @Input() style = 'mapbox://styles/mapbox/streets-v11';
   @Input() bounds: LngLatBoundsLike = [
@@ -25,9 +27,13 @@ export class MapComponent implements OnInit {
   @Input() fullscreenControl = true;
   @Input() scaleControl = true;
   // layer related inputs
-  @Input() features: geojson.Feature[] = [];
+  // @Input() features: geojson.Feature[] = [];
+  // @Input() feature: geojson.Feature | null = InitBoundary;
+  @Input() feature$ = new Observable<geojson.Feature>();
+  map!: Map;
 
-  ngOnInit() {
-    console.log('LLLLLLLLLLLLLLLLLLLLLLLLLL', this.features);
+  onMapLoad(map: Map) {
+    this.map = map;
+    console.log(this.map.getCenter());
   }
 }

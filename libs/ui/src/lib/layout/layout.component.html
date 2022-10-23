@@ -10,42 +10,40 @@
     </button>
     Attica Digital Twin
     <span class="spacer"></span>
-    <button
+    <!-- <button
       mat-icon-button
       *ngIf="right.mode === 'over'"
       (click)="right.toggle()"
     >
       <mat-icon *ngIf="!right.opened"> more_vert </mat-icon>
       <mat-icon *ngIf="right.opened"> close </mat-icon>
-    </button>
+    </button> -->
   </mat-toolbar-row>
-  <mat-toolbar-row class="bg-white">
+  <!-- <mat-toolbar-row class="bg-white">
     <button mat-icon-button class="text-black">
       <mat-icon>layers</mat-icon>
     </button>
-  </mat-toolbar-row>
+  </mat-toolbar-row> -->
 </mat-toolbar>
 
 <mat-sidenav-container>
   <!-- left sidenav -->
   <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
+    <img class="avatar" src="/assets/logo.png" />
     <mat-nav-list>
       <h4 matSubheader>Attica Region</h4>
       <a mat-list-item routerLink="boundaries">Display Boundaries</a>
-      <a mat-list-item routerLink="rivers">Display Rivers</a>
-      <a mat-list-item>Link 3</a>
+      <!-- <a mat-list-item routerLink="rivers">Display Rivers</a>
+      <a mat-list-item>Link 3</a> -->
     </mat-nav-list>
     <mat-divider></mat-divider>
     <mat-nav-list>
       <h4 matSubheader>Plant Nursery</h4>
-      <a mat-list-item>Link 1</a>
-      <a mat-list-item>Link 2</a>
-      <a mat-list-item>Link 3</a>
+      <a mat-list-item>Location</a>
     </mat-nav-list>
-    <img class="avatar" src="/assets/logo.png" />
   </mat-sidenav>
   <!-- right sidenav -->
-  <mat-sidenav
+  <!-- <mat-sidenav
     #right
     #sidenavRight="matSidenav"
     class="mat-sidenav-right content"
@@ -57,7 +55,7 @@
       <a mat-list-item>Right Link 3</a>
       <a mat-list-item>Right Link 4</a>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
   <mat-sidenav-content>
     <div class="content">
       <!-- <button mat-button (click)="right.open()">right</button>

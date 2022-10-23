@@ -1,7 +1,9 @@
-<mgl-layer
-  id="id"
-  [type]="type"
-  [source]="source"
-  [layout]="layout"
-  [paint]="paint"
-></mgl-layer>
+<ng-container *ngIf="data$ | async as data">
+  <mgl-layer
+    id="id"
+    [type]="type"
+    [source]="{ type: 'geojson', data: data }"
+    [layout]="layout"
+    [paint]="paint"
+  ></mgl-layer>
+</ng-container>

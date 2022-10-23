@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AtticaRegionBoundariesComponent } from './attica-region-boundaries.component';
+import { AtticaRegionBoundaryComponent } from './attica-region-boundary.component';
 
 describe('AtticaRegionComponent', () => {
-  let component: AtticaRegionBoundariesComponent;
-  let fixture: ComponentFixture<AtticaRegionBoundariesComponent>;
+  let component: AtticaRegionBoundaryComponent;
+  let fixture: ComponentFixture<AtticaRegionBoundaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AtticaRegionBoundariesComponent],
+      declarations: [AtticaRegionBoundaryComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AtticaRegionBoundariesComponent);
+    fixture = TestBed.createComponent(AtticaRegionBoundaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

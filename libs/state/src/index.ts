@@ -1,2 +1,1 @@
-// export * from './lib/state.module';
-export * from './lib/boundaries.repository';
+export * from './lib/boundary.repository';

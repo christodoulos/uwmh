@@ -1,20 +1,16 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
-import { AnyPaint, AnySourceData, LineLayout } from 'mapbox-gl';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AnyPaint, LineLayout } from 'mapbox-gl';
 import { v4 as uuidv4 } from 'uuid';
 import * as geojson from 'geojson';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'uwmh-layer',
   templateUrl: './layer.component.html',
   styleUrls: ['./layer.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayerComponent implements OnInit {
+export class LayerComponent {
   @Input() id = uuidv4();
   @Input() type:
     | 'symbol'
@@ -29,14 +25,7 @@ export class LayerComponent implements OnInit {
     | 'custom'
     | 'sky' = 'line';
   @Input() sourceType = 'geojson';
-  @Input() data: geojson.Feature = {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [0, 0],
-    },
-    properties: {},
-  };
+  @Input() data$ = new Observable<geojson.Feature>();
   @Input() layout: LineLayout = {
     'line-join': 'round',
     'line-cap': 'round',
@@ -45,12 +34,4 @@ export class LayerComponent implements OnInit {
     'line-color': '#000',
     'line-width': 2,
   };
-  source = {
-    type: this.sourceType,
-    data: this.data,
-  } as AnySourceData;
-
-  ngOnInit() {
-    console.log('BBBBBBBBBBBBBBBBBBBBBB', this.data);
-  }
 }
