@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
@@ -29,11 +31,11 @@ export class MapComponent {
   // layer related inputs
   // @Input() features: geojson.Feature[] = [];
   // @Input() feature: geojson.Feature | null = InitBoundary;
-  @Input() feature$ = new Observable<geojson.Feature>();
-  map!: Map;
+  @Input() features$ = Array(new Observable<geojson.Feature>());
+  @Output() map = new EventEmitter<Map>();
+  // map!: Map;
 
   onMapLoad(map: Map) {
-    this.map = map;
-    console.log(this.map.getCenter());
+    this.map.emit(map);
   }
 }

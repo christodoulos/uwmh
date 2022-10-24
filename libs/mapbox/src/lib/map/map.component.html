@@ -8,6 +8,9 @@
   <mgl-control mglNavigation *ngIf="navigationControl"></mgl-control>
   <mgl-control mglFullscreen *ngIf="fullscreenControl"></mgl-control>
   <mgl-control mglScale *ngIf="scaleControl"></mgl-control>
-  <!-- <uwmh-layer *ngFor="let feature of features" [data]="feature"></uwmh-layer> -->
-  <uwmh-layer [data$]="feature$"></uwmh-layer>
+  <uwmh-layer
+    *ngFor="let feature$ of features$"
+    [data$]="feature$"
+  ></uwmh-layer>
+  <!-- <uwmh-layer [data$]="feature$"></uwmh-layer> -->
 </mgl-map>

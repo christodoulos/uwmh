@@ -10,6 +10,7 @@ export class AtticaRegionBoundaryComponent implements OnInit {
   attica_region$ = this.repository.attica_region$;
   load_attica_region = this.effects.loadAtticaRegionAction;
   dispatch = dispatch;
+  features$ = Array(this.attica_region$);
   constructor(
     private repository: BoundaryRepository,
     private effects: BoundaryEffects

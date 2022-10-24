@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type MultiBoundaryDocument = MultiBoundary & Document;
+export type MultilineDocument = Multiline & Document;
 
 @Schema()
 export class Point {
@@ -12,19 +12,19 @@ export class Point {
 }
 
 @Schema()
-export class Polygon {
-  @Prop({ default: 'Polygon' })
+export class LineString {
+  @Prop({ default: 'LineString' })
   type: string;
   @Prop({ required: true, index: '2dsphere' })
-  coordinates: Point[];
+  coordinates: number[][];
 }
 
 @Schema()
-export class MultiPolygon {
-  @Prop({ default: 'MultiPolygon' })
+export class MultiLineStringGeometry {
+  @Prop({ default: 'MultiLineString' })
   type: string;
   @Prop({ required: true, index: '2dsphere' })
-  coordinates: Polygon[];
+  coordinates: LineString[];
 }
 
 @Schema()
@@ -33,14 +33,22 @@ export class Properties {
   desc: string;
 }
 
-@Schema({ collection: 'multi_boundaries' })
-export class MultiBoundary {
+@Schema()
+export class Feature {
   @Prop({ default: 'Feature' })
   type: string;
   @Prop()
   properties: Properties;
   @Prop()
-  geometry: MultiPolygon;
+  geometry: MultiLineStringGeometry;
 }
 
-export const MultiBoudarySchema = SchemaFactory.createForClass(MultiBoundary);
+@Schema()
+export class Multiline {
+  @Prop()
+  type: string;
+  @Prop()
+  geojson: Feature;
+}
+
+export const MultiLineSchema = SchemaFactory.createForClass(Multiline);

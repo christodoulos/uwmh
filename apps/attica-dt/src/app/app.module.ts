@@ -7,7 +7,7 @@ import { EffectsNgModule, Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 
 import { UiModule } from '@uwmh/ui';
-import { BoundaryEffects } from '@uwmh/state';
+import { BoundaryEffects, RiverEffects } from '@uwmh/state';
 
 import { AppComponent } from './app.component';
 
@@ -33,7 +33,7 @@ export function initElfDevTools(actions: Actions) {
       },
     ]),
     HttpClientModule,
-    EffectsNgModule.forRoot([BoundaryEffects]),
+    EffectsNgModule.forRoot([BoundaryEffects, RiverEffects]),
     UiModule,
   ],
   providers: [
