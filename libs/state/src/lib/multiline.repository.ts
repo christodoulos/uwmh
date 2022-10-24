@@ -4,8 +4,8 @@ import {
   createAction,
   createEffect,
   ofType,
-  props,
 } from '@ngneat/effects';
+import { persistState, localStorageStrategy } from '@ngneat/elf-persist-state';
 
 import { Injectable } from '@angular/core';
 import * as geojson from 'geojson';
@@ -43,6 +43,11 @@ const { state, config } = createState(
 
 const store = new Store({ state, name: 'rivers', config });
 
+export const rivers_persist = persistState(store, {
+  key: 'rivers',
+  storage: localStorageStrategy,
+});
+
 @Injectable({ providedIn: 'root' })
 export class RiverRepository {
   attica_rivers$ = store.pipe(select((state) => state.attica_rivers));
@@ -77,7 +82,6 @@ export class RiverEffects {
       map(() => this.http.get<MultiLine[]>('/api/multiline/rivers')),
       tap((response) => {
         const subscription = response.subscribe((res) => {
-          console.log(res);
           this.rivers.updateRivers(res);
           subscription.unsubscribe();
         });

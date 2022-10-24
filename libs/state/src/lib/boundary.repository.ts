@@ -4,8 +4,8 @@ import {
   createAction,
   createEffect,
   ofType,
-  props,
 } from '@ngneat/effects';
+import { persistState, localStorageStrategy } from '@ngneat/elf-persist-state';
 
 import { Injectable } from '@angular/core';
 import * as geojson from 'geojson';
@@ -37,6 +37,11 @@ const { state, config } = createState(
 );
 
 const store = new Store({ state, name: 'boundaries', config });
+
+export const boundary_persist = persistState(store, {
+  key: 'boundaries',
+  storage: localStorageStrategy,
+});
 
 @Injectable({ providedIn: 'root' })
 export class BoundaryRepository {
