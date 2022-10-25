@@ -62,7 +62,8 @@
     <div class="content">
       <!-- <button mat-button (click)="right.open()">right</button>
       <button mat-button (click)="left.open()">left</button> -->
-      <router-outlet></router-outlet>
+      <!-- <router-outlet></router-outlet> -->
+      <uwmh-map (map)="onMap($event)" (flyto)="onFlyto()"></uwmh-map>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

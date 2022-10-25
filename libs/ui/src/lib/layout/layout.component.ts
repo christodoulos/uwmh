@@ -1,8 +1,15 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Map } from 'mapbox-gl';
 import { delay, filter } from 'rxjs';
 
 @UntilDestroy()
@@ -15,6 +22,8 @@ import { delay, filter } from 'rxjs';
 export class LayoutComponent implements AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
   // @ViewChild('right') sidenavRight!: MatSidenav;
+  @Output() map = new EventEmitter<Map>();
+  @Output() flyto = new EventEmitter();
   constructor(private observer: BreakpointObserver, private router: Router) {}
   ngAfterViewInit() {
     this.observer
@@ -43,5 +52,13 @@ export class LayoutComponent implements AfterViewInit {
           this.sidenav.close();
         }
       });
+  }
+
+  onMap(map: Map) {
+    this.map.emit(map);
+  }
+
+  onFlyto() {
+    this.flyto.emit();
   }
 }

@@ -6,8 +6,6 @@ import {
   Output,
 } from '@angular/core';
 import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
-import * as geojson from 'geojson';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'uwmh-map',
@@ -32,11 +30,5 @@ export class MapComponent {
   onMapLoad(map: Map) {
     this.map.emit(map);
     this.themap = map;
-  }
-
-  click0() {
-    console.log('skata');
-    this.flyto.emit();
-    // this.themap?.flyTo({ center: [55, 33] });
   }
 }

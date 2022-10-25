@@ -1,20 +1,67 @@
-import { Component } from '@angular/core';
-import { BoundaryEffects, RiverEffects } from '@uwmh/state';
-import { dispatch } from '@ngneat/effects';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatSidenav } from '@angular/material/sidenav';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Map } from 'mapbox-gl';
+import { NavigationEnd, Router } from '@angular/router';
+import { delay, filter } from 'rxjs';
+import { DTMapService } from './map.service';
+import { AppService } from './app.service';
+
+@UntilDestroy()
 @Component({
   selector: 'uwmh-root',
-  template: '<uwmh-layout></uwmh-layout>',
+  styleUrls: ['app.component.scss'],
+  templateUrl: 'app.component.html',
 })
-export class AppComponent {
-  loadAtticaRegionAction = this.boundary_effects.loadAtticaRegionAction;
-  loadAtticaRiversAction = this.river_effects.loadAtticaRiversAction;
-  dispatch = dispatch;
+export class AppComponent implements AfterViewInit {
+  @ViewChild('left') sidenav!: MatSidenav;
+
   constructor(
-    private boundary_effects: BoundaryEffects,
-    private river_effects: RiverEffects
-  ) {
-    this.dispatch(this.loadAtticaRegionAction());
-    this.dispatch(this.loadAtticaRiversAction());
+    private appService: AppService,
+    private mapService: DTMapService,
+    private observer: BreakpointObserver,
+    private router: Router
+  ) {}
+
+  ngAfterViewInit() {
+    this.observer
+      .observe('(max-width: 800px)')
+      .pipe(delay(1), untilDestroyed(this))
+      .subscribe((res) => {
+        if (res.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
+
+    this.router.events
+      .pipe(
+        untilDestroyed(this),
+        filter((e) => e instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        if (this.sidenav.mode === 'over') {
+          this.sidenav.close();
+        }
+      });
+  }
+
+  onMap(map: Map) {
+    this.mapService.map = map;
+  }
+
+  attica_boundaries() {
+    const subscription = this.mapService.attica_boundaries();
+    subscription.unsubscribe();
+  }
+
+  attica_rivers() {
+    const subscription = this.mapService.attica_rivers();
+    subscription.unsubscribe();
   }
 }

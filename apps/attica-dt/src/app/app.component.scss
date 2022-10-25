@@ -1,0 +1,49 @@
+mat-toolbar {
+  background: #004a9f;
+  color: white;
+}
+
+mat-sidenav {
+  width: 200px;
+  border-right: none;
+  text-align: center;
+}
+
+.mat-sidenav-right {
+  width: 200px;
+
+  text-align: center;
+}
+
+.content {
+  height: calc(100vh - 64px);
+  // height: calc(100vh - 128px);
+  overflow: auto;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+  // height: calc(100vh - 128px);
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.avatar {
+  width: 190px;
+  margin: auto;
+  margin-top: 2px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

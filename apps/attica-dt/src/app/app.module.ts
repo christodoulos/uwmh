@@ -6,10 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsNgModule, Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 
-import { UiModule } from '@uwmh/ui';
-import { BoundaryEffects, RiverEffects } from '@uwmh/state';
+import { MaterialModule } from './material/material.module';
+import { BoundaryEffects, RiverEffects } from './state';
 
 import { AppComponent } from './app.component';
+import { MapComponent } from './map/map.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -21,20 +23,24 @@ export function initElfDevTools(actions: Actions) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MapComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      {
-        path: '',
-        loadChildren: () =>
-          import('./public/public.module').then((m) => m.PublicModule),
-      },
+      // {
+      //   path: '',
+      //   loadChildren: () =>
+      //     import('./public/public.module').then((m) => m.PublicModule),
+      // },
     ]),
     HttpClientModule,
     EffectsNgModule.forRoot([BoundaryEffects, RiverEffects]),
-    UiModule,
+    MaterialModule,
+    NgxMapboxGLModule.withConfig({
+      accessToken:
+        'pk.eyJ1IjoiY2hyaXN0b2RvdWxvcyIsImEiOiJja3luYTd3eW0ydGFiMm9xcHRmMGJyOHVrIn0.c1mSurunkjU4Wyf2hxcy0g',
+    }),
   ],
   providers: [
     {
