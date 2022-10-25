@@ -15,8 +15,8 @@ import { join } from 'path';
   imports: [
     MongooseModule.forRoot(process.env.DATABASE_URI),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'gnosys'),
-      exclude: ['/api*'],
+      rootPath: join(__dirname, '..', 'attica-dt'),
+      // exclude: ['/api*'],
     }),
     LocationModule,
     MultiBoundaryModule,
