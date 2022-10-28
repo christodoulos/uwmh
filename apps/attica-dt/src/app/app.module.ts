@@ -1,13 +1,14 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsNgModule, Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 
 import { MaterialModule } from './material/material.module';
-import { BoundaryEffects, RiverEffects } from './state';
+import { AtticaIndexEffects, AtticaEffects } from './state';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -27,6 +28,7 @@ export function initElfDevTools(actions: Actions) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     RouterModule.forRoot([
       // {
       //   path: '',
@@ -35,7 +37,7 @@ export function initElfDevTools(actions: Actions) {
       // },
     ]),
     HttpClientModule,
-    EffectsNgModule.forRoot([BoundaryEffects, RiverEffects]),
+    EffectsNgModule.forRoot([AtticaIndexEffects, AtticaEffects]),
     MaterialModule,
     NgxMapboxGLModule.withConfig({
       accessToken:
