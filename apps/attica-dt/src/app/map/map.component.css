@@ -3,3 +3,12 @@ button {
   align-items: center;
   justify-content: center;
 }
+
+.small {
+  font-size: x-small;
+}
+
+.small-button {
+  height: 24px;
+  align-items: center;
+}

@@ -26,9 +26,26 @@ export class MapComponent {
   @Output() map = new EventEmitter<Map>();
   @Output() flyto = new EventEmitter();
   themap: Map | undefined;
+  mapStyle = 'streets';
 
   onMapLoad(map: Map) {
     this.map.emit(map);
     this.themap = map;
+  }
+
+  getLayers() {
+    console.log(this.themap?.getStyle().layers);
+  }
+
+  streets() {
+    this.themap?.setStyle('mapbox://styles/mapbox/streets-v11');
+  }
+
+  satelite() {
+    this.themap?.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
+  }
+
+  outdoors() {
+    this.themap?.setStyle('mapbox://styles/mapbox/outdoors-v11');
   }
 }

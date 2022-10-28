@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@uwmh/data": ["libs/data/src/index.ts"],
       "@uwmh/mapbox": ["libs/mapbox/src/index.ts"],
       "@uwmh/material": ["libs/material/src/index.ts"],
       "@uwmh/state": ["libs/state/src/index.ts"],

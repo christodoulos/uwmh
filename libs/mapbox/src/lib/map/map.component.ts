@@ -30,8 +30,8 @@ export class MapComponent {
   themap: Map | undefined;
 
   onMapLoad(map: Map) {
-    this.map.emit(map);
     this.themap = map;
+    this.map.emit(map);
   }
 
   click0() {

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
@@ -32,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,

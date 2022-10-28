@@ -7,13 +7,35 @@
 >
   <mgl-control mglNavigation *ngIf="navigationControl"></mgl-control>
   <mgl-control mglFullscreen *ngIf="fullscreenControl"></mgl-control>
-  <mgl-control mglScale *ngIf="scaleControl"></mgl-control>
+  <mgl-control
+    mglScale
+    *ngIf="scaleControl"
+    position="bottom-right"
+  ></mgl-control>
 
   <mgl-control>
     <div class="mapboxgl-ctrl-group">
-      <button title="Layers">
+      <button title="Layers" (click)="getLayers()">
         <mat-icon>layers</mat-icon>
       </button>
     </div>
+  </mgl-control>
+
+  <mgl-control position="bottom-left"
+    ><mat-button-toggle-group
+      [ngModel]="mapStyle"
+      aria-label="Font Style"
+      class="small-button small"
+    >
+      <mat-button-toggle (click)="streets()" value="streets"
+        >Streets</mat-button-toggle
+      >
+      <mat-button-toggle (click)="satelite()" value="satelite"
+        >Stellite Streets</mat-button-toggle
+      >
+      <mat-button-toggle (click)="outdoors()" value="outdoors"
+        >Outdoors</mat-button-toggle
+      >
+    </mat-button-toggle-group>
   </mgl-control>
 </mgl-map>

@@ -19,7 +19,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
 
   constructor(
-    private appService: AppService,
+    // private service: AppService,
     private mapService: DTMapService,
     private observer: BreakpointObserver,
     private router: Router
@@ -56,12 +56,12 @@ export class AppComponent implements AfterViewInit {
   }
 
   attica_boundaries() {
-    const subscription = this.mapService.attica_boundaries();
-    subscription.unsubscribe();
+    // const subscription = this.mapService.attica_boundaries();
+    // subscription.unsubscribe();
   }
 
   attica_rivers() {
-    const subscription = this.mapService.attica_rivers();
-    subscription.unsubscribe();
+    // const subscription = this.mapService.attica_rivers();
+    // subscription.unsubscribe();
   }
 }
