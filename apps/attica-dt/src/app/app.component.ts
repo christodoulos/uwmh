@@ -6,7 +6,6 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Map } from 'mapbox-gl';
 import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter } from 'rxjs';
-import { DTMapService } from './map.service';
 import { AppService } from './app.service';
 
 @UntilDestroy()
@@ -19,11 +18,12 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
 
   constructor(
-    // private service: AppService,
-    private mapService: DTMapService,
+    private service: AppService,
     private observer: BreakpointObserver,
     private router: Router
-  ) {}
+  ) {
+    console.log('APP COMPONENT');
+  }
 
   ngAfterViewInit() {
     this.observer
@@ -51,17 +51,7 @@ export class AppComponent implements AfterViewInit {
       });
   }
 
-  onMap(map: Map) {
-    this.mapService.map = map;
-  }
-
-  attica_boundaries() {
-    // const subscription = this.mapService.attica_boundaries();
-    // subscription.unsubscribe();
-  }
-
-  attica_rivers() {
-    // const subscription = this.mapService.attica_rivers();
-    // subscription.unsubscribe();
+  async onMap(map: Map) {
+    await this.service.setupMap(map);
   }
 }

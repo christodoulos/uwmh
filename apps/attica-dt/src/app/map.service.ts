@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Map } from 'mapbox-gl';
-import { Subscription } from 'rxjs';
-// import { BoundaryStore, RiverStore } from './state';
+import { AtticaStore } from './state';
+import { sources } from '@uwmh/data';
+import { zip, concat, merge } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DTMapService {
-  map: Map | undefined;
-
-  // atticaBoundary$ = this.boundaryStore$.attica_region$;
-  // atticaRivers$ = this.riverStore$.attica_rivers$;
-
-  // constructor() // private boundaryStore$: BoundaryStore,
-  // // private riverStore$: RiverStore
-  // {}
+  constructor() {
+    // console.log('MAP SERVICE');
+    // this.atticaBoundary$.subscribe((data) => {
+    //   this.sources['attica-boundary'] = {
+    //     id: 'attica-boundary',
+    //     source: { type: 'geojson', data },
+    //   };
+    //   console.log(this.sources);
+    // });
+    // this.atticaRivers$.subscribe((data) => {
+    //   this.sources['attica-rivers'] = {
+    //     id: 'attica-rivers',
+    //     source: { type: 'geojson', data },
+    //   };
+    //   console.log(this.sources);
+    // });
+  }
 
   // attica_boundaries(): Subscription {
   //   const subscription: Subscription = this.atticaBoundary$.subscribe(

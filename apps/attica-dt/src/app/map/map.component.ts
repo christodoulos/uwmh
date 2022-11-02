@@ -14,12 +14,13 @@ import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent {
-  @Input() style = 'mapbox://styles/mapbox/streets-v11';
+  @Input() style = 'mapbox://styles/christodoulos/ckzichi5q001l15p1wpq6sbvs';
   @Input() bounds: LngLatBoundsLike = [
     [24.116494, 38.340999],
     [22.890434, 35.823757],
   ];
   @Input() center: LngLatLike = [23.600814, 37.840158];
+  @Input() pitch = [45] as [number];
   @Input() navigationControl = true;
   @Input() fullscreenControl = true;
   @Input() scaleControl = true;

@@ -4,11 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { EffectsNgModule, Actions } from '@ngneat/effects-ng';
+import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 
 import { MaterialModule } from './material/material.module';
-import { AtticaIndexEffects, AtticaEffects } from './state';
+import { LayersRepository, SourcesRepository } from './state';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -37,7 +37,11 @@ export function initElfDevTools(actions: Actions) {
       // },
     ]),
     HttpClientModule,
-    EffectsNgModule.forRoot([AtticaIndexEffects, AtticaEffects]),
+    // EffectsNgModule.forRoot([
+    //   AtticaIndexEffects,
+    //   AtticaEffects,
+    //   SourcesEffects,
+    // ]),
     MaterialModule,
     NgxMapboxGLModule.withConfig({
       accessToken:
@@ -51,6 +55,8 @@ export function initElfDevTools(actions: Actions) {
       useFactory: initElfDevTools,
       deps: [Actions],
     },
+    SourcesRepository,
+    LayersRepository,
   ],
   bootstrap: [AppComponent],
 })

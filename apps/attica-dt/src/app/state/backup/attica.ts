@@ -8,46 +8,19 @@ import {
   props,
 } from '@ngneat/effects';
 import { persistState, localStorageStrategy } from '@ngneat/elf-persist-state';
+import {
+  DTFeature,
+  DTFeatureCollection,
+  InitDTFeature,
+  InitFeatureCollection,
+  River,
+} from '@uwmh/data';
+import { BackendService } from '../../backend.service';
 import { map, Subscription, tap } from 'rxjs';
-
-import * as geojson from 'geojson';
-import { BackendService } from '../backend.service';
-import { River } from '@uwmh/data';
-
-interface DTFeature extends geojson.Feature {
-  center: geojson.Point;
-}
-
-const InitDTFeature: DTFeature = {
-  type: 'Feature',
-  geometry: {
-    type: 'Point',
-    coordinates: [0, 0],
-  },
-  properties: {},
-  center: {
-    type: 'Point',
-    coordinates: [0, 0],
-  },
-};
-
-const InitFeatureCollection: geojson.FeatureCollection = {
-  type: 'FeatureCollection',
-  features: [
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0, 0],
-      },
-      properties: {},
-    },
-  ],
-};
 
 interface Attica {
   boundary: DTFeature;
-  rivers: geojson.FeatureCollection;
+  rivers: DTFeatureCollection;
 }
 
 const { state, config } = createState(

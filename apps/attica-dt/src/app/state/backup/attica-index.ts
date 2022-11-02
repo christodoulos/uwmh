@@ -9,7 +9,7 @@ import {
 import { persistState, localStorageStrategy } from '@ngneat/elf-persist-state';
 import { map, Subscription, tap } from 'rxjs';
 
-import { BackendService } from '../backend.service';
+import { BackendService } from '../../backend.service';
 import { AtticaIndex } from '@uwmh/data';
 
 const { state, config } = createState(
@@ -45,16 +45,20 @@ export class AtticaIndexEffects {
 
   loadAtticaIndexAction = createAction('[Attica Index] Load Index');
 
-  atticaIndexActions = actionsFactory('Atica Index Actions');
+  // atticaIndexActions = actionsFactory('Atica Index Actions');
 
   loadIndexEffect$ = createEffect((actions$) =>
     actions$.pipe(
       ofType(this.loadAtticaIndexAction),
       map(() => this.service.getAtticaIndex()),
       tap((res) => {
-        const sub: Subscription = res.subscribe((data) => {
-          this.store.updateAtticaIndex(data);
-          sub.unsubscribe();
+        res.subscribe({
+          next: (data) => {
+            // console.log('ATTICA-INDEX', data);
+            this.store.updateAtticaIndex(data);
+          },
+          error: (error) => console.log('ATTICA INDEX ERROR', error),
+          complete: () => console.log('HTTP complete'),
         });
       })
     )
