@@ -15,8 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@uwmh/data": ["libs/data/src/index.ts"],
-      "@uwmh/state": ["libs/state/src/index.ts"]
+      "@uwmh/data": ["libs/data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
