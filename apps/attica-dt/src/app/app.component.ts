@@ -1,12 +1,19 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Map } from 'mapbox-gl';
 import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter } from 'rxjs';
 import { AppService } from './app.service';
+import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
+import { UIRepository } from './state';
 
 @UntilDestroy()
 @Component({
@@ -14,15 +21,20 @@ import { AppService } from './app.service';
   styleUrls: ['app.component.scss'],
   templateUrl: 'app.component.html',
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
 
   constructor(
     private service: AppService,
     private observer: BreakpointObserver,
-    private router: Router
-  ) {
-    console.log('APP COMPONENT');
+    private router: Router,
+    private dialog: MatDialog,
+    private ui: UIRepository
+  ) {}
+
+  ngOnInit() {
+    this.ui.setIsLoading(true);
+    this.dialog.open(WelcomeDialogComponent);
   }
 
   ngAfterViewInit() {
@@ -53,5 +65,13 @@ export class AppComponent implements AfterViewInit {
 
   async onMap(map: Map) {
     await this.service.setupMap(map);
+  }
+
+  attica_bounds() {
+    this.service.boundary_zoom();
+  }
+
+  rivers() {
+    this.service.rivers();
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AtticaIndex, Boundary, River } from '@uwmh/data';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

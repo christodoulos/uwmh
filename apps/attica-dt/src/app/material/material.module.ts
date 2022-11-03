@@ -13,6 +13,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatTableModule,
     MatSelectModule,
+    MatDialogModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatInputModule,
@@ -43,6 +47,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatTableModule,
     MatSelectModule,
+    MatDialogModule,
+    MatSlideToggleModule,
   ],
 })
 export class MaterialModule {}

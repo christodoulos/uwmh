@@ -8,11 +8,13 @@ import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 
 import { MaterialModule } from './material/material.module';
-import { LayersRepository, SourcesRepository } from './state';
+import { LayersRepository, SourcesRepository, UIRepository } from './state';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
+import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.component';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -24,7 +26,12 @@ export function initElfDevTools(actions: Actions) {
 }
 
 @NgModule({
-  declarations: [AppComponent, MapComponent],
+  declarations: [
+    AppComponent,
+    MapComponent,
+    WelcomeDialogComponent,
+    LayerToggleComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,11 +44,6 @@ export function initElfDevTools(actions: Actions) {
       // },
     ]),
     HttpClientModule,
-    // EffectsNgModule.forRoot([
-    //   AtticaIndexEffects,
-    //   AtticaEffects,
-    //   SourcesEffects,
-    // ]),
     MaterialModule,
     NgxMapboxGLModule.withConfig({
       accessToken:
@@ -57,6 +59,7 @@ export function initElfDevTools(actions: Actions) {
     },
     SourcesRepository,
     LayersRepository,
+    UIRepository,
   ],
   bootstrap: [AppComponent],
 })

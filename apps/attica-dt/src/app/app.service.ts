@@ -3,8 +3,8 @@ import {
   GeoJSONMapSource,
   Layer,
   LayersRepository,
-  LayerType,
   SourcesRepository,
+  UIRepository,
 } from './state';
 import { AnyLayer, Map } from 'mapbox-gl';
 import { Observable } from 'rxjs';
@@ -17,7 +17,8 @@ export class AppService {
   map!: Map;
   constructor(
     private attica_sources: SourcesRepository,
-    private attica_layers: LayersRepository
+    private attica_layers: LayersRepository,
+    private ui: UIRepository
   ) {}
 
   sources: Observable<GeoJSONMapSource | null>[] = [
@@ -37,12 +38,17 @@ export class AppService {
     await this.attica_sources.updateRivers();
     this.setupSources();
     this.show_layers();
+    this.ui.setIsLoading(false);
+    this.map.on('styledata', () => {
+      this.setupSources();
+      this.show_layers();
+    });
   }
 
   async setupSources() {
     for (const source$ of this.sources) {
       const s = source$.subscribe((source) => {
-        if (source)
+        if (source && !this.map.getSource(source.id))
           this.map.addSource(source.id, { type: 'geojson', data: source.data });
       });
       s.unsubscribe();
@@ -52,13 +58,15 @@ export class AppService {
   show_layers() {
     for (const layer$ of this.layers) {
       const s = layer$.subscribe((layer) => {
-        console.log(layer.type);
-        this.map.addLayer({
-          id: layer.id,
-          source: layer.source_id,
-          type: layer.type,
-          paint: this.layer_paint(layer),
-        } as AnyLayer);
+        if (!layer.visible && this.map.getLayer(layer.id))
+          this.map.removeLayer(layer.id);
+        if (layer.visible && !this.map.getLayer(layer.id))
+          this.map.addLayer({
+            id: layer.id,
+            source: layer.source_id,
+            type: layer.type,
+            paint: this.layer_paint(layer),
+          } as AnyLayer);
       });
       s.unsubscribe();
     }
@@ -78,5 +86,21 @@ export class AppService {
         };
     }
     return;
+  }
+
+  boundary_zoom() {
+    const s = this.attica_layers.attica_bbox$.subscribe((bbox) => {
+      this.map.fitBounds(bbox as mapboxgl.LngLatBoundsLike);
+    });
+    s.unsubscribe();
+  }
+
+  rivers() {
+    const s = this.attica_layers.rivers_bbox$.subscribe((bbox) => {
+      // this.attica_layers.toggle_layer('rivers');
+      // this.show_layers();
+      this.map.fitBounds(bbox as mapboxgl.LngLatBoundsLike);
+    });
+    s.unsubscribe();
   }
 }

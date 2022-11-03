@@ -1,19 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
 import * as geojson from 'geojson';
-
-export type LayerType =
-  | 'background'
-  | 'symbol'
-  | 'circle'
-  | 'fill-extrusion'
-  | 'fill'
-  | 'heatmap'
-  | 'hillshade'
-  | 'line'
-  | 'raster'
-  | 'sky'
-  | 'custom';
+import { find } from 'lodash-es';
 
 export interface Layer {
   visible: boolean;
@@ -38,7 +26,7 @@ const atticaLayersInit: AtticaLayers = {
   boundary_line: {
     visible: true,
     source_id: 'attica-boundary',
-    id: 'attica_boundary_line',
+    id: 'attica-boundary-line',
     type: 'line',
     center: {
       type: 'Point',
@@ -54,7 +42,7 @@ const atticaLayersInit: AtticaLayers = {
   boundary_fill: {
     visible: true,
     source_id: 'attica-boundary',
-    id: 'attica_boundary_fill',
+    id: 'attica-boundary-fill',
     type: 'fill',
     center: {
       type: 'Point',
@@ -70,7 +58,7 @@ const atticaLayersInit: AtticaLayers = {
   rivers: {
     visible: false,
     source_id: 'attica-rivers',
-    id: 'attica_rivers',
+    id: 'attica-rivers',
     type: 'line',
     bbox: [
       22.848511300642798, 37.62036675138182, 24.182549647704207,
@@ -81,6 +69,8 @@ const atticaLayersInit: AtticaLayers = {
   },
 };
 
+type ObjectKey = keyof typeof atticaLayersInit;
+
 const atticaLayers = createStore(
   { name: 'attica-layers' },
   withProps<AtticaLayers>(atticaLayersInit)
@@ -88,7 +78,33 @@ const atticaLayers = createStore(
 
 @Injectable()
 export class LayersRepository {
+  attica_bbox$ = atticaLayers.pipe(select((state) => state.boundary_line.bbox));
+  rivers_bbox$ = atticaLayers.pipe(select((state) => state.rivers.bbox));
   boundary_line$ = atticaLayers.pipe(select((state) => state.boundary_line));
   boundary_fill$ = atticaLayers.pipe(select((state) => state.boundary_fill));
   rivers$ = atticaLayers.pipe(select((state) => state.rivers));
+
+  constructor() {
+    find(atticaLayers);
+  }
+
+  toggle_layer(state_key: string) {
+    const s = atticaLayers
+      .pipe(select((state) => state[state_key as ObjectKey]))
+      .subscribe((layer) => {
+        layer.visible = !layer.visible;
+        atticaLayers.update((state) => ({ ...state, ...layer }));
+      });
+    s.unsubscribe();
+  }
+
+  set_layer_visibility(state_key: string, status: boolean) {
+    const s = atticaLayers
+      .pipe(select((state) => state[state_key as ObjectKey]))
+      .subscribe((layer) => {
+        layer.visible = status;
+        atticaLayers.update((state) => ({ ...state, ...layer }));
+      });
+    s.unsubscribe();
+  }
 }

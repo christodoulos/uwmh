@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Welcome to Attica Digital Twin</h1>
+
+<div mat-dialog-content>
+  <div class="flex flex-row items-center">
+    Loading Sources
+    <mat-spinner
+      class="ml-2"
+      *ngIf="is_loading$ | async"
+      [diameter]="20"
+    ></mat-spinner>
+    <mat-icon class="ml-2" *ngIf="(is_loading$ | async) === false"
+      >done</mat-icon
+    >
+  </div>
+</div>
+
+<div mat-dialog-actions *ngIf="(is_loading$ | async) === false">
+  <button mat-button mat-dialog-close="">OK</button>
+</div>

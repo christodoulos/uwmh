@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Map } from 'mapbox-gl';
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
 import { LayersRepository, Layer } from './state';
