@@ -30,6 +30,7 @@ export class MapComponent {
   ];
   @Input() center: LngLatLike = [23.600814, 37.840158];
   @Input() pitch = [0] as [number];
+  @Input() antialias = true;
   @Input() navigationControl = true;
   @Input() fullscreenControl = true;
   @Input() scaleControl = true;
