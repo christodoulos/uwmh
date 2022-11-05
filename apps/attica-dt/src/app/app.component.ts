@@ -74,4 +74,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   rivers() {
     this.service.rivers();
   }
+
+  nursery() {
+    this.service.nursery();
+  }
 }

@@ -16,7 +16,8 @@
         "tsConfig": "apps/attica-dt/tsconfig.app.json",
         "assets": [
           "apps/attica-dt/src/favicon.ico",
-          "apps/attica-dt/src/assets"
+          "apps/attica-dt/src/assets",
+          "apps/attica-dt/src/web-ifc.wasm"
         ],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

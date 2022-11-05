@@ -79,6 +79,9 @@ const atticaLayers = createStore(
 @Injectable()
 export class LayersRepository {
   attica_bbox$ = atticaLayers.pipe(select((state) => state.boundary_line.bbox));
+  attica_center$ = atticaLayers.pipe(
+    select((state) => state.boundary_line.center)
+  );
   rivers_bbox$ = atticaLayers.pipe(select((state) => state.rivers.bbox));
   boundary_line$ = atticaLayers.pipe(select((state) => state.boundary_line));
   boundary_fill$ = atticaLayers.pipe(select((state) => state.boundary_fill));

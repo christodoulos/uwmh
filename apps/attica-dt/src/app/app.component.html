@@ -18,15 +18,12 @@
   <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
     <img class="avatar" src="/assets/logo.png" />
     <mat-nav-list>
-      <h4 matSubheader>Attica Region</h4>
-      <a mat-list-item (click)="attica_bounds()">Display Boundaries</a>
-      <a mat-list-item (click)="rivers()">Display Rivers</a>
+      <h4 matSubheader>Quick Navigation</h4>
+      <a mat-list-item (click)="attica_bounds()">Attica Region</a>
+      <a mat-list-item (click)="rivers()">Attica Perfecture</a>
+      <a mat-list-item (click)="nursery()"> Plant Nursery</a>
     </mat-nav-list>
     <mat-divider></mat-divider>
-    <mat-nav-list>
-      <h4 matSubheader>Plant Nursery</h4>
-      <a mat-list-item routerLink="nursery">Location</a>
-    </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content">
