@@ -1,47 +1,39 @@
 import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
-import { River, Source, sources } from '@uwmh/data';
-import { GeoJSONSourceRaw } from 'mapbox-gl';
-import {
-  lastValueFrom,
-  map,
-  mergeMap,
-  Observable,
-  Subscription,
-  tap,
-} from 'rxjs';
-import { BackendService } from '../../backend.service';
-import * as geojson from 'geojson';
-
-export interface GeoJSONMapSource {
-  id: string;
-  data: geojson.GeoJSON;
-}
-
-interface AtticaSources {
-  boundary: GeoJSONMapSource | null;
-  rivers: GeoJSONMapSource | null;
-}
+import { lastValueFrom, map, mergeMap, tap } from 'rxjs';
+import { BackendService } from '../backend.service';
+import { MapSources, sourcesInit } from '@uwmh/data';
 
 const atticaSources = createStore(
-  { name: 'attica-sources' },
-  withProps<AtticaSources>({ boundary: null, rivers: null })
+  { name: 'sources' },
+  withProps<MapSources>(sourcesInit)
 );
 
 @Injectable()
 export class SourcesRepository {
   constructor(private backend: BackendService) {}
 
-  boundary$ = atticaSources.pipe(select((state) => state.boundary));
-  rivers$ = atticaSources.pipe(select((state) => state.rivers));
+  attica_boundary$ = atticaSources.pipe(
+    select((state) => state['attica-boundary'])
+  );
+  attica_rivers$ = atticaSources.pipe(
+    select((state) => state['attica-rivers'])
+  );
 
-  async updateBoundary() {
+  async updateAll() {
+    return await Promise.all([
+      this.updateAtticaBoundary(),
+      this.updateAtticaRivers(),
+    ]);
+  }
+
+  async updateAtticaBoundary() {
     return await lastValueFrom(
       this.backend.getAtticaIndex().pipe(
         map((data) => data.boundary),
         mergeMap((id) => this.backend.getBoundary(id)),
         map((boundary) => ({
-          boundary: {
+          'attica-boundary': {
             id: 'attica-boundary',
             data: boundary.geometry,
           },
@@ -53,7 +45,7 @@ export class SourcesRepository {
     );
   }
 
-  async updateRivers() {
+  async updateAtticaRivers() {
     return await lastValueFrom(
       this.backend.getAtticaIndex().pipe(
         map((data) => data.rivers),
@@ -69,7 +61,7 @@ export class SourcesRepository {
             }))
         ),
         map((rivers) => ({
-          rivers: {
+          'attica-rivers': {
             id: 'attica-rivers',
             data: { type: 'FeatureCollection' as const, features: [...rivers] },
           },

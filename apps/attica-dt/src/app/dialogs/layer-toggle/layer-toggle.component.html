@@ -2,12 +2,24 @@
 
 <div mat-dialog-content>
   <div class="flex flex-col space-y-2 p-2">
-    <mat-slide-toggle [(ngModel)]="bl">Line Boundary</mat-slide-toggle>
-    <mat-slide-toggle [(ngModel)]="bf">Boundary fill</mat-slide-toggle>
-    <mat-slide-toggle [(ngModel)]="br">Rivers</mat-slide-toggle>
+    <mat-slide-toggle
+      [(ngModel)]="bl"
+      (toggleChange)="onToggleChange('attica-region-boundary-line')"
+      >Attica Region Boundary Line</mat-slide-toggle
+    >
+    <mat-slide-toggle
+      [(ngModel)]="bf"
+      (toggleChange)="onToggleChange('attica-region-boundary-fill')"
+      >Attica Region Boundary Fill</mat-slide-toggle
+    >
+    <mat-slide-toggle
+      [(ngModel)]="br"
+      (toggleChange)="onToggleChange('attica-perfecture-rivers')"
+      >Attica Perfecture Rivers</mat-slide-toggle
+    >
   </div>
 </div>
 
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="[bl, bf, br]">Toggle</button>
-</div>
+</div> -->

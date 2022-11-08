@@ -1,17 +1,14 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Map } from 'mapbox-gl';
 import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter } from 'rxjs';
 import { AppService } from './app.service';
+import { DTMapService } from './map.service';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
 import { UIRepository } from './state';
 
@@ -25,6 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
 
   constructor(
+    private mapService: DTMapService,
     private service: AppService,
     private observer: BreakpointObserver,
     private router: Router,
@@ -63,8 +61,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
   }
 
-  async onMap(map: Map) {
-    await this.service.setupMap(map);
+  async onMapEvent(map: Map) {
+    await this.mapService.setupMap(map);
+    this.ui.setIsLoading(false);
   }
 
   attica_bounds() {
