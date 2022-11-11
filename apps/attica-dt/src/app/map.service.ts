@@ -30,16 +30,16 @@ export class DTMapService {
   async setupMap(map: Map) {
     this.map = map;
     await this.sources.updateAll(); // setup of local state
-    this.setupSources();
-    this.setupLayers();
+    this.setupMapboxSources();
+    this.setupMapboxLayers();
     this.mapSubject.next(map);
     this.map.on('style.load', () => {
-      this.setupSources();
-      this.setupLayers();
+      this.setupMapboxSources();
+      this.setupMapboxLayers();
     });
   }
 
-  setupSources() {
+  setupMapboxSources() {
     for (const source$ of this.all_sources) {
       const s = source$.subscribe((source) => {
         if (source && !this.map.getSource(source.id))
@@ -49,7 +49,7 @@ export class DTMapService {
     }
   }
 
-  setupLayers() {
+  setupMapboxLayers() {
     // Add GeoJSON Layers
     let s = this.geojson_layers$.subscribe((layers$) => {
       layers$.forEach((layer$) => {

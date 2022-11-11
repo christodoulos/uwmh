@@ -1,13 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+
+export type AtticaDocument = HydratedDocument<Attica>;
 
 @Schema({ collection: 'attica' })
 export class Attica {
   @Prop()
-  boundary: Types.ObjectId;
-  @Prop()
-  rivers: Types.ObjectId[];
+  boundary: string;
+  @Prop([String])
+  rivers: string[];
 }
 
-export type AtticaDocument = Attica & Document;
 export const AtticaSchema = SchemaFactory.createForClass(Attica);

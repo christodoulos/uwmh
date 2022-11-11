@@ -30,14 +30,23 @@ export class SourcesRepository {
   async updateAtticaBoundary() {
     return await lastValueFrom(
       this.backend.getAtticaIndex().pipe(
-        map((data) => data.boundary),
-        mergeMap((id) => this.backend.getBoundary(id)),
-        map((boundary) => ({
-          'attica-boundary': {
-            id: 'attica-boundary',
-            data: boundary.geometry,
-          },
-        })),
+        map((data) => {
+          console.log('ATTICA INDEX>', data);
+          return data.boundary;
+        }),
+        mergeMap((id) => {
+          console.log('BOUNDARY DATA ID>', id);
+          return this.backend.getBoundary(id);
+        }),
+        map((boundary) => {
+          console.log('BOUNDARY DATA>', boundary);
+          return {
+            'attica-boundary': {
+              id: 'attica-boundary',
+              data: boundary.geometry,
+            },
+          };
+        }),
         tap((boundary) =>
           atticaSources.update((state) => ({ ...state, ...boundary }))
         )
@@ -48,17 +57,25 @@ export class SourcesRepository {
   async updateAtticaRivers() {
     return await lastValueFrom(
       this.backend.getAtticaIndex().pipe(
-        map((data) => data.rivers),
-        mergeMap((ids) => this.backend.getRivers(ids)),
+        map((data) => {
+          console.log('ATTICA INDEX>', data);
+          return data.rivers;
+        }),
+        mergeMap((ids) => {
+          console.log('RIVERS IDS>', ids);
+          return this.backend.getRivers(ids);
+        }),
         map(
           (
             rivers // converts to FeatureCollection features
-          ) =>
-            rivers.map((river) => ({
+          ) => {
+            console.log('ATTICA RIVERS>', rivers);
+            return rivers.map((river) => ({
               type: river.type,
               geometry: river.geometry,
               properties: river.properties,
-            }))
+            }));
+          }
         ),
         map((rivers) => ({
           'attica-rivers': {

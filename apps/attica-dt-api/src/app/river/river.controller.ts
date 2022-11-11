@@ -11,13 +11,14 @@ export class RiverController {
   }
 
   @Get(':id')
-  async by_id(@Param() params) {
+  async by_id(@Param() params: { id: string }) {
     const id = params.id;
     return await this.service.get_by_id(id);
   }
 
   @Post()
   async manyby_id(@Body() ids: string[]) {
-    return await this.service.getmany_by_id(ids);
+    const data = await this.service.getmany_by_id(ids);
+    return data;
   }
 }

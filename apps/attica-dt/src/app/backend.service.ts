@@ -9,6 +9,7 @@ export class BackendService {
   constructor(private http: HttpClient) {}
 
   getAtticaIndex() {
+    console.log('getAtticaIndex');
     return this.http.get<AtticaIndex>('/api/attica');
   }
 
@@ -17,6 +18,7 @@ export class BackendService {
   }
 
   getRivers(ids: string[]) {
+    console.log('getRivers', ids);
     return this.http.post<River[]>('/api/river/', ids);
   }
 }

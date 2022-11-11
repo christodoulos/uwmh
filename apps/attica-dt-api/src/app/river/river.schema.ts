@@ -1,25 +1,28 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {
-  MultiLineString,
-  BBox,
-  Point,
-  Properties,
-} from '../geojson.mongoose.schema';
-import { Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
+
+@Schema()
+export class RGeometry {
+  @Prop()
+  type: string;
+  @Prop([[[Number]]])
+  coordinates: number[][][];
+}
+
+const RGeometrySchema = SchemaFactory.createForClass(RGeometry);
+
+export type RiverDocument = HydratedDocument<River>;
 
 @Schema({ collection: 'rivers' })
 export class River {
   @Prop({ default: 'Feature' })
   type: string;
-  @Prop()
-  geometry: MultiLineString;
-  @Prop()
-  bbox: BBox;
-  @Prop()
-  center: Point;
-  @Prop()
-  properties: Properties;
+  // @Prop({ type: RGeometrySchema })
+  // geometry: RGeometry;
+  @Prop([Number])
+  bbox: number[];
+  @Prop([Number])
+  center: number[];
 }
 
-export type RiverDocument = River & Document;
 export const RiverSchema = SchemaFactory.createForClass(River);

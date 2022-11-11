@@ -1,25 +1,27 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {
-  BBox,
-  Point,
-  Properties,
-  MultiPolygon,
-} from '../geojson.mongoose.schema';
-import { Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
+
+@Schema()
+export class BGeometry {
+  @Prop()
+  type: string;
+  @Prop([[[[Number]]]])
+  coordinates: number[][][][];
+}
+const BGeometrySchema = SchemaFactory.createForClass(BGeometry);
+
+export type BoundaryDocument = HydratedDocument<Boundary>;
 
 @Schema({ collection: 'boundaries' })
 export class Boundary {
   @Prop({ default: 'Feature' })
   type: string;
-  @Prop()
-  geometry: MultiPolygon;
-  @Prop()
-  bbox: BBox;
-  @Prop()
-  center: Point;
-  @Prop()
-  properties: Properties;
+  @Prop({ type: BGeometrySchema })
+  geometry: BGeometry;
+  @Prop([Number])
+  bbox: number[];
+  @Prop([Number])
+  center: number[];
 }
 
-export type BoundaryDocument = Boundary & Document;
 export const BoundarySchema = SchemaFactory.createForClass(Boundary);
