@@ -1,24 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Document, HydratedDocument } from 'mongoose';
 
 @Schema()
-export class RGeometry {
-  @Prop(String)
+class rGeometry extends Document {
+  @Prop({ type: String })
   type: string;
   @Prop([[[Number]]])
   coordinates: number[][][];
 }
 
-const RGeometrySchema = SchemaFactory.createForClass(RGeometry);
+const rGeometrySchema = SchemaFactory.createForClass(rGeometry);
 
-export type RiverDocument = HydratedDocument<River>;
+// export type RiverDocument = HydratedDocument<River>;
+export type RiverDocument = River & Document;
 
 @Schema({ collection: 'rivers' })
-export class River {
+export class River extends Document {
   @Prop({ default: 'Feature' })
   type: string;
-  @Prop({ type: RGeometrySchema })
-  geometry: RGeometry;
+  @Prop({ type: rGeometrySchema })
+  geometry: rGeometry;
   @Prop([Number])
   bbox: number[];
   @Prop([Number])
