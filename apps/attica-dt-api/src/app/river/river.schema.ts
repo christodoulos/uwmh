@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 @Schema()
 export class RGeometry {
-  @Prop()
+  @Prop(String)
   type: string;
   @Prop([[[Number]]])
   coordinates: number[][][];
@@ -17,8 +17,8 @@ export type RiverDocument = HydratedDocument<River>;
 export class River {
   @Prop({ default: 'Feature' })
   type: string;
-  // @Prop({ type: RGeometrySchema })
-  // geometry: RGeometry;
+  @Prop({ type: RGeometrySchema })
+  geometry: RGeometry;
   @Prop([Number])
   bbox: number[];
   @Prop([Number])

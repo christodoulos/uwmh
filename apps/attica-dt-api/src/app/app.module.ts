@@ -17,7 +17,7 @@ import { RiverModule } from './river/river.module';
       rootPath: join(__dirname, '..', 'attica-dt'),
       exclude: ['/api*'],
     }),
-    MongooseModule.forRoot('process.env.DATABASE_URI'),
+    MongooseModule.forRoot(process.env.DATABASE_URI),
     MongooseModule.forFeature([
       {
         name: Attica.name,
