@@ -2,13 +2,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, HydratedDocument } from 'mongoose';
 
 @Schema()
-class bGeometry extends Document {
+export class bGeometry extends Document {
   @Prop({ type: String })
   type: string;
   @Prop([[[[Number]]]])
   coordinates: number[][][][];
 }
-const bGeometrySchema = SchemaFactory.createForClass(bGeometry);
+export const bGeometrySchema = SchemaFactory.createForClass(bGeometry);
 
 // export type BoundaryDocument = HydratedDocument<Boundary>;
 export type BoundaryDocument = Boundary & Document;

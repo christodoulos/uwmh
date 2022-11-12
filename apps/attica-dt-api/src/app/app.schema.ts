@@ -5,9 +5,9 @@ export type AtticaDocument = HydratedDocument<Attica>;
 
 @Schema({ collection: 'attica' })
 export class Attica {
-  @Prop()
+  @Prop({ type: String })
   boundary: string;
-  @Prop([String])
+  @Prop({ type: [String] })
   rivers: string[];
 }
 
