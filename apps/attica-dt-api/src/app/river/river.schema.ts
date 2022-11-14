@@ -9,7 +9,7 @@ class Geometry {
   coordinates: number[][][];
 }
 
-export const GeometrySchema = SchemaFactory.createForClass(Geometry);
+const GeometrySchema = SchemaFactory.createForClass(Geometry);
 
 export type RiverDocument = HydratedDocument<River>;
 

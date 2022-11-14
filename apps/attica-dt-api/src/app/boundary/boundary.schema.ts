@@ -8,6 +8,7 @@ class Geometry {
   @Prop([[[[Number]]]])
   coordinates: number[][][][];
 }
+
 const GeometrySchema = SchemaFactory.createForClass(Geometry);
 
 export type BoundaryDocument = HydratedDocument<Boundary>;
