@@ -4,7 +4,6 @@ import { AnyLayer, LngLatLike, Map, MercatorCoordinate } from 'mapbox-gl';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LayersRepository, SourcesRepository } from './state';
 import { Layer } from '@uwmh/data';
-// import { ThreejsLayer } from './layer.service';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { IFCLoader } from 'three/examples/jsm/loaders/IFCLoader';
