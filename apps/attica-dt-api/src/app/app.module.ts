@@ -10,6 +10,7 @@ import { join } from 'path';
 
 import { BoundaryModule } from './boundary/boundary.module';
 import { RiverModule } from './river/river.module';
+import { NurseryModule } from './nursery/nursery.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { RiverModule } from './river/river.module';
     ]),
     BoundaryModule,
     RiverModule,
+    NurseryModule,
   ],
 
   controllers: [AppController],
