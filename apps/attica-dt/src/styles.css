@@ -1,5 +1,7 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~mapbox-gl/dist/mapbox-gl.css';
+@import '~@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+@import '~threebox-plugin/dist/threebox.css';
 
 @tailwind base;
 @tailwind components;

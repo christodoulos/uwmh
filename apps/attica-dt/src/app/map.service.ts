@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GeoJSONMapSource } from '@uwmh/data';
-import { AnyLayer, LngLatLike, Map, MercatorCoordinate } from 'mapbox-gl';
+import {
+  AnyLayer,
+  LngLatLike,
+  Map,
+  MercatorCoordinate,
+  Popup,
+} from 'mapbox-gl';
+import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
+// import { Threebox } from 'threebox-plugin';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LayersRepository, SourcesRepository } from './state';
 import { Layer } from '@uwmh/data';
@@ -36,6 +44,63 @@ export class DTMapService {
       this.setupMapboxSources();
       this.setupMapboxLayers();
     });
+    const popup = new Popup({ closeButton: false });
+
+    const draw = new MapboxDraw({
+      displayControlsDefault: true,
+      // Select which mapbox-gl-draw control buttons to add to the map.
+      controls: {
+        polygon: true,
+        trash: true,
+      },
+      // Set mapbox-gl-draw to draw by default.
+      // The user does not have to click the polygon control button first.
+      // defaultMode: 'draw_polygon',
+    });
+    map.addControl(draw);
+
+    this.map.on('mousemove', (e) => {
+      const features = this.map.queryRenderedFeatures(e.point);
+      // Limit the number of properties we're displaying for
+      // legibility and performance
+      const displayProperties = [
+        'type',
+        'properties',
+        'id',
+        'layer',
+        'source',
+        'sourceLayer',
+        'state',
+      ];
+
+      const displayFeatures = features.map((feat: { [key: string]: any }) => {
+        const displayFeat = {} as { [key: string]: any };
+        displayProperties.forEach((prop) => {
+          displayFeat[prop] = feat[prop];
+        });
+        return displayFeat;
+      });
+
+      if (
+        displayFeatures.length &&
+        displayFeatures[0]['properties']['type'] === 'plant_nursery'
+      ) {
+        // console.log(displayFeatures);
+        this.map.getCanvas().style.cursor = 'pointer';
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML('<strong>Plant nursery</strong>')
+          .addTo(this.map);
+      } else {
+        this.map.getCanvas().style.cursor = 'default';
+        popup.remove();
+      }
+      // console.log(displayFeatures[0]['properties']);
+    });
+    this.map.on('mouseleave', () => {
+      popup.remove();
+    });
+    this.map.getCanvas().style.cursor = 'default';
   }
 
   setupMapboxSources() {
@@ -78,11 +143,14 @@ export class DTMapService {
             layer.modelOrigin.coordinates as LngLatLike,
             layer.modelUrl
           );
-          this.map.addLayer(layer_3d.customLayer);
+          this.map.addLayer(layer_3d.customLayer, 'waterway-label');
         });
         s.unsubscribe();
       });
     });
+
+    // const lala = new ThreeboxLayer(this.map);
+    // this.map.addLayer(lala.customLayer);
   }
 
   layer_paint(layer: Layer) {
@@ -145,11 +213,11 @@ class ThreejsLayer {
 
         // create two lights to illuminate the model
         const directionalLight = new THREE.DirectionalLight(0xffffff);
-        directionalLight.position.set(0, -70, 100).normalize();
+        directionalLight.position.set(0, -200, 200).normalize();
         this.scene.add(directionalLight);
 
         const directionalLight2 = new THREE.DirectionalLight(0xffffff);
-        directionalLight2.position.set(0, 70, 100).normalize();
+        directionalLight2.position.set(0, 200, 200).normalize();
         this.scene.add(directionalLight2);
 
         // use three GLTF loader to add 3d model to the scene
@@ -164,7 +232,7 @@ class ThreejsLayer {
         // loader.load(
         //   '/assets/pump.ifc',
         //   ((ifc: any) => {
-        //     this.scene?.add(ifc);
+        //     this.scene?.add(ifc.mesh);
         //   }).bind(this)
         // );
 
@@ -190,12 +258,14 @@ class ThreejsLayer {
           modelTransform.rotateZ
         );
 
+        const te = this.map.queryTerrainElevation(this.modelOrigin) ?? 1;
         const m = new THREE.Matrix4().fromArray(matrix);
         const l = new THREE.Matrix4()
           .makeTranslation(
             modelTransform.translateX,
             modelTransform.translateY,
-            modelTransform.translateZ ?? 1
+            // modelTransform.translateZ ?? 1
+            te * modelTransform.scale
           )
           .scale(
             new THREE.Vector3(
@@ -216,3 +286,71 @@ class ThreejsLayer {
     };
   }
 }
+
+// class ThreeboxLayer {
+//   customLayer: mapboxgl.CustomLayerInterface;
+//   // tb: typeof Threebox;
+//   constructor(private map: Map) {
+//     // (window as any).tb = this.tb;
+//     this.customLayer = <mapboxgl.CustomLayerInterface>{
+//       id: '3d-model-lalakis',
+//       type: 'custom',
+//       renderingMode: '3d',
+//       // source: 'composite',
+//       // sourceLayer: 'building',
+//       onAdd: (map: Map, gl: any) => {
+//         // map = this.map;
+//         (window as any).tb = new Threebox(map, gl, {
+//           defaultLights: true,
+//           enableSelectingObjects: true,
+//           realSunlight: true,
+//           // sky: true,
+//           enableRotatingObjects: true,
+//           enableTooltips: true,
+//         });
+
+//         const options = {
+//           type: 'gltf', //'gltf'/'mtl'
+//           // obj: 'https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf', //model url
+//           obj: '/assets/building.gltf',
+//           units: 'meters', //units in the default values are always in meters
+//           scale: 1,
+//           rotation: { x: 90, y: 180, z: 0 }, //default rotation
+//           // anchor: 'center',
+//         };
+//         (window as any).tb.loadObj(options, (model: any) => {
+//           model.setCoords([23.781372557061157, 37.988260208268386]);
+//           model.addTooltip('A radar in the middle of nowhere', true);
+//           (window as any).tb.add(model);
+//           model.castShadow = true;
+//           (window as any).tb.lights.dirLight.target = model;
+//         });
+
+//         // (window as any).tb.getSunPosition(
+//         //   new Date(),
+//         //   [23.781372557061157, 37.988260208268386]
+//         // );
+
+//         // instantiate a red sphere and position it at the origin lnglat
+//         // const sphere = (window as any).tb
+//         //   .sphere({ material: 'MeshToonMaterial' })
+//         //   .setCoords([23.781372557061157, 37.988260208268386, 0]);
+//         // sphere.addEventListener('ObjectMouseOver', onObjectMouseOver, false);
+//         // sphere.addEventListener('ObjectMouseOut', onObjectMouseOut, false);
+//         // add sphere to the scene
+//         // (window as any).tb.add(sphere);
+//       },
+//       render: (gl, matrix) => {
+//         (window as any).tb.setSunlight(
+//           new Date(),
+//           [23.781372557061157, 37.988260208268386]
+//         ); //set Sun light for the given datetime and lnglat
+//         // let dupDate = new Date(date.getTime()); // dup the date to avoid modify the original instance
+//         // let dateTZ = new Date(dupDate.toLocaleString("en-US", { timeZone: 'Australia/Sydney' }));
+//         // hour.innerHTML = "Sunlight on date/time: " + dateTZ.toLocaleString();
+//         (window as any).tb.update();
+//         // this.map.resize();
+//       },
+//     };
+//   }
+// }

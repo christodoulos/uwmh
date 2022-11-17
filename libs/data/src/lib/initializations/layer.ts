@@ -52,7 +52,7 @@ export const LayersInit: MapLayers = {
       38.36211380168018,
     ],
     paint_line_color: '#00F',
-    paint_line_width: 1,
+    paint_line_width: 2,
   },
   /////////////////////////////////////
   // Athens Municipal Plant Nurscery //
