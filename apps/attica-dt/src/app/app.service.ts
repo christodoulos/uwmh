@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LayersRepository } from './state';
+import { LayersRepository, PNWeatherRepository } from './state';
 
 import { DTMapService } from './map.service';
 
@@ -8,10 +8,16 @@ import { DTMapService } from './map.service';
 })
 export class AppService {
   map = this.mapService.mapSubject;
+  pnNeedsUpdate$ = this.pnrepo.needsUpdate$;
   constructor(
     private mapService: DTMapService,
-    private layers: LayersRepository
-  ) {}
+    private layers: LayersRepository,
+    private pnrepo: PNWeatherRepository
+  ) {
+    this.pnNeedsUpdate$.subscribe((needsUpdate) =>
+      needsUpdate ? pnrepo.updateWeather() : {}
+    );
+  }
 
   boundary_zoom() {
     this.layers.show_layer('attica-region-boundary-line');

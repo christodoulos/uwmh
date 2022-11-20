@@ -1,0 +1,84 @@
+<div *ngIf="weatherData$ | async as w" class="text-sm">
+  <h1 mat-dialog-title class="text-center">Plant Nursery Weather Data</h1>
+  <div mat-dialog-content>
+    <div class="flex flex-row items-center justify-around">
+      <div><img src="/assets/weather/{{ w.weather.icon }}.png" /></div>
+
+      <div class="compass text-sm">
+        <div class="direction">
+          <p>
+            {{ w.wind_cdir }}<span>{{ w.wind_spd | number: '1.2-2' }} m/s</span>
+          </p>
+        </div>
+        <div class="arrow {{ w.wind_cdir | lowercase }}"></div>
+      </div>
+    </div>
+
+    <p class="text-center font-semibold">{{ w.ob_time | date: 'medium' }}</p>
+    <p class="text-center font-semibold">
+      {{ w.weather.description }}, {{ w.temp }}&#8451;
+    </p>
+    <p class="text-center font-semibold">Cloud coverage {{ w.clouds }}%</p>
+    <p class="text-center font-semibold">Visibility {{ w.vis }} Km</p>
+
+    <mat-divider></mat-divider>
+    <table class="w-full">
+      <tr>
+        <td>Feels Like</td>
+        <td>{{ w.app_temp }}&#8451;</td>
+      </tr>
+      <tr>
+        <td>Atm. Pressure</td>
+        <td>{{ w.pres | number: '1.2-2' }} mb</td>
+      </tr>
+      <tr>
+        <td>Wind Gust</td>
+        <td>{{ w.gust | number: '1.2-2' }} m/s</td>
+      </tr>
+      <tr>
+        <td>Relative Humidity</td>
+        <td>{{ w.rh }}%</td>
+      </tr>
+      <tr>
+        <td>Dew Point</td>
+        <td>{{ w.dewpt | number: '1.2-2' }}&#8451;</td>
+      </tr>
+      <tr>
+        <td>Precipitation</td>
+        <td>{{ w.precip | number: '1.2-2' }} mm/hr</td>
+      </tr>
+      <tr>
+        <td>UV Index</td>
+        <td>{{ w.uv }}</td>
+      </tr>
+      <tr>
+        <td>Air Quality Index</td>
+        <td>{{ w.aqi }}</td>
+      </tr>
+      <tr>
+        <td>Diffuse horizontal solar irradiance</td>
+        <td>{{ w.dhi | number: '1.2-2' }} W/m^2</td>
+      </tr>
+      <tr>
+        <td>Direct normal solar irradiance</td>
+        <td>{{ w.dni | number: '1.2-2' }} W/m^2</td>
+      </tr>
+      <tr>
+        <td>Global horizontal solar irradiance</td>
+        <td>{{ w.ghi | number: '1.2-2' }} W/m^2</td>
+      </tr>
+      <tr>
+        <td>Estimated Solar Radiation</td>
+        <td>{{ w.solar_rad | number: '1.2-2' }} W/m^2</td>
+      </tr>
+      <tr>
+        <td>Solar elevation angle</td>
+        <td>{{ w.elev_angle }} degrees</td>
+      </tr>
+    </table>
+  </div>
+  <div mat-dialog-actions class="text-sm">
+    Data provided from &nbsp;
+    <a href="https://www.weatherbit.io/api">Weatherbit API</a>
+  </div>
+</div>

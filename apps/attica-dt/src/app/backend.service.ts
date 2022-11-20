@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AtticaIndex, Boundary, River } from '@uwmh/data';
+import { AtticaIndex, Boundary, PNWeather, River } from '@uwmh/data';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class BackendService {
   constructor(private http: HttpClient) {}
 
   getAtticaIndex() {
-    console.log('getAtticaIndex');
+    // console.log('getAtticaIndex');
     return this.http.get<AtticaIndex>('/api/attica');
   }
 
@@ -18,7 +18,11 @@ export class BackendService {
   }
 
   getRivers(ids: string[]) {
-    console.log('getRivers', ids);
+    // console.log('getRivers', ids);
     return this.http.post<River[]>('/api/river/', ids);
+  }
+
+  getPNWeather() {
+    return this.http.get<PNWeather>('/api/nursery/latest');
   }
 }

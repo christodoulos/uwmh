@@ -1,40 +1,79 @@
 import { Injectable } from '@angular/core';
-import { GeoJSONMapSource, Layer } from '@uwmh/data';
+import { GeoJSONMapSource, Layer, MapWhere } from '@uwmh/data';
 import { AnyLayer, LngLatLike, Map, Popup } from 'mapbox-gl';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LayersRepository, SourcesRepository } from './state';
+import {
+  LayersRepository,
+  SourcesRepository,
+  PNWeatherRepository,
+  MapWhereRepository,
+} from './state';
 import { ThreejsLayer } from './helpers';
+import { mapQuery } from './helpers/map.query0';
+import { debounce } from 'lodash-es';
+import { MatDialog } from '@angular/material/dialog';
+import { MapInfoComponent } from './dialogs/map-info/map-info.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DTMapService {
   map!: Map;
+  popup = new Popup({ closeButton: false });
   mapSubject = new BehaviorSubject(this.map);
   geojson_layers$ = this.layers.geojson_layers$;
   custom_3d_layers$ = this.layers.custom_3d_layers$;
+  type$ = this.mapwhere.type$;
   constructor(
     private sources: SourcesRepository,
-    private layers: LayersRepository
-  ) {}
+    private layers: LayersRepository,
+    private pnweather: PNWeatherRepository,
+    private mapwhere: MapWhereRepository,
+    private dialog: MatDialog
+  ) {
+    this.type$.subscribe((data) => {
+      switch (data) {
+        case 'plant_nursery':
+          this.popup
+            .setLngLat([23.781372557061157, 37.988260208268386])
+            .setHTML(
+              '<strong>Plant nursery</strong> <p>Double click to view available data</p>'
+            )
+            .addTo(this.map);
+          break;
+
+        default:
+          this.popup.remove();
+          break;
+      }
+    });
+  }
 
   all_sources: Observable<GeoJSONMapSource>[] = [
     this.sources.attica_boundary$,
     this.sources.attica_rivers$,
   ];
 
+  // recieves the map instance just after its initialization
   async setupMap(map: Map) {
+    // hold the map instance for further operations
     this.map = map;
-    await this.sources.updateAll(); // setup of local state
+    // set up the local redux state
+    await this.sources.updateAll();
     this.setupMapboxSources();
     this.setupMapboxLayers();
+    // state is setup, time to next the Map Behaviour Subject
     this.mapSubject.next(map);
+    // setup an empty popup, but not display it yet
+    const popup = new Popup({ closeButton: false });
+
+    this.map.getCanvas().style.cursor = 'default';
+
     this.map.on('style.load', () => {
       this.setupMapboxSources();
       this.setupMapboxLayers();
     });
-    const popup = new Popup({ closeButton: false });
 
     const draw = new MapboxDraw({
       displayControlsDefault: true,
@@ -49,50 +88,24 @@ export class DTMapService {
     });
     map.addControl(draw);
 
-    this.map.on('mousemove', (e) => {
-      const features = this.map.queryRenderedFeatures(e.point);
-      // Limit the number of properties we're displaying for
-      // legibility and performance
-      const displayProperties = [
-        'type',
-        'properties',
-        'id',
-        'layer',
-        'source',
-        'sourceLayer',
-        'state',
-      ];
+    this.map.on(
+      'mousemove',
+      debounce((e) => this.mapwhere.update(mapQuery(e, map)), 100)
+    );
 
-      const displayFeatures = features.map((feat: { [key: string]: any }) => {
-        const displayFeat = {} as { [key: string]: any };
-        displayProperties.forEach((prop) => {
-          displayFeat[prop] = feat[prop];
-        });
-        return displayFeat;
+    this.map.on('dblclick', (e) => {
+      const s = this.type$.subscribe((data) => {
+        if (data == 'plant_nursery') {
+          e.preventDefault();
+          this.dialog.open(MapInfoComponent);
+        }
       });
-
-      if (
-        displayFeatures.length &&
-        displayFeatures[0]['properties']['type'] === 'plant_nursery'
-      ) {
-        // console.log(displayFeatures);
-        this.map.getCanvas().style.cursor = 'pointer';
-        popup
-          .setLngLat(e.lngLat)
-          .setHTML('<strong>Plant nursery</strong>')
-          .addTo(this.map);
-      } else {
-        this.map.getCanvas().style.cursor = 'default';
-        popup.remove();
-      }
-      // console.log(displayFeatures[0]['properties']);
+      s.unsubscribe();
     });
-
-    this.map.on('mouseleave', () => {
-      popup.remove();
-    });
-
-    this.map.getCanvas().style.cursor = 'default';
+    // this.map.on('mouseleave', () => {
+    //   console.log('lala');
+    //   popup.remove();
+    // });
   }
 
   setupMapboxSources() {

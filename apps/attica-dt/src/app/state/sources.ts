@@ -31,15 +31,15 @@ export class SourcesRepository {
     return await lastValueFrom(
       this.backend.getAtticaIndex().pipe(
         map((data) => {
-          console.log('ATTICA INDEX>', data);
+          // console.log('ATTICA INDEX>', data);
           return data.boundary;
         }),
         mergeMap((id) => {
-          console.log('BOUNDARY DATA ID>', id);
+          // console.log('BOUNDARY DATA ID>', id);
           return this.backend.getBoundary(id);
         }),
         map((boundary) => {
-          console.log('BOUNDARY DATA>', boundary);
+          // console.log('BOUNDARY DATA>', boundary);
           return {
             'attica-boundary': {
               id: 'attica-boundary',
@@ -58,18 +58,18 @@ export class SourcesRepository {
     return await lastValueFrom(
       this.backend.getAtticaIndex().pipe(
         map((data) => {
-          console.log('ATTICA INDEX>', data);
+          // console.log('ATTICA INDEX>', data);
           return data.rivers;
         }),
         mergeMap((ids) => {
-          console.log('RIVERS IDS>', ids);
+          // console.log('RIVERS IDS>', ids);
           return this.backend.getRivers(ids);
         }),
         map(
           (
             rivers // converts to FeatureCollection features
           ) => {
-            console.log('ATTICA RIVERS>', rivers);
+            // console.log('ATTICA RIVERS>', rivers);
             return rivers.map((river) => ({
               type: river.type,
               geometry: river.geometry,

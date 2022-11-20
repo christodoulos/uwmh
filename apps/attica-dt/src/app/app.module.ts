@@ -8,13 +8,20 @@ import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 
 import { MaterialModule } from './material/material.module';
-import { LayersRepository, SourcesRepository, UIRepository } from './state';
+import {
+  LayersRepository,
+  MapWhereRepository,
+  PNWeatherRepository,
+  SourcesRepository,
+  UIRepository,
+} from './state';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
 import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.component';
+import { MapInfoComponent } from './dialogs/map-info/map-info.component';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -31,6 +38,7 @@ export function initElfDevTools(actions: Actions) {
     MapComponent,
     WelcomeDialogComponent,
     LayerToggleComponent,
+    MapInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +68,8 @@ export function initElfDevTools(actions: Actions) {
     SourcesRepository,
     LayersRepository,
     UIRepository,
+    PNWeatherRepository,
+    MapWhereRepository,
   ],
   bootstrap: [AppComponent],
 })

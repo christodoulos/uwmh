@@ -53,7 +53,7 @@ export const PNWeatherSchema = new mongoose.Schema(
       type: 'Number',
     },
     ob_time: {
-      type: 'Date',
+      type: 'String',
     },
     pod: {
       type: 'String',

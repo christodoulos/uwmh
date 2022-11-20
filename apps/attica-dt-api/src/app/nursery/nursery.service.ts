@@ -13,4 +13,8 @@ export class NurseryService {
   async get_all(): Promise<PNWeather[]> {
     return this.nWeatherModel.find().exec();
   }
+
+  async get_latest(): Promise<PNWeather> {
+    return this.nWeatherModel.findOne({}, {}, { sort: { _id: -1 } }).exec();
+  }
 }
