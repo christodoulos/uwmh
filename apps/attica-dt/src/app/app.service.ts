@@ -14,9 +14,18 @@ export class AppService {
     private layers: LayersRepository,
     private pnrepo: PNWeatherRepository
   ) {
-    this.pnNeedsUpdate$.subscribe((needsUpdate) =>
-      needsUpdate ? pnrepo.updateWeather() : {}
-    );
+    // this.pnNeedsUpdate$.subscribe((needsUpdate) => {
+    //   if (needsUpdate) {
+    //     this.pnrepo.updateWeather();
+    //   }
+    // });
+    // setTimeout(() => {
+    //   this.scheduled_tasks();
+    // }, 60 * 1000);
+  }
+
+  scheduled_tasks() {
+    this.pnrepo.updateWeather();
   }
 
   boundary_zoom() {
@@ -49,6 +58,7 @@ export class AppService {
   }
 
   nursery() {
+    // this.pnrepo.updateWeather();
     this.layers.hide_layer('attica-region-boundary-line');
     this.layers.hide_layer('attica-region-boundary-fill');
     this.map.value.flyTo({

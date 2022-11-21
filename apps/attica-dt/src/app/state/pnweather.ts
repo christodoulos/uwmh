@@ -20,18 +20,30 @@ export class PNWeatherRepository {
 
   constructor(private backend: BackendService) {}
 
-  async updateWeather() {
-    return await lastValueFrom(
-      this.backend.getPNWeather().pipe(
-        tap((data) => {
-          const updated_on = new Date();
-          pnweather.update((state) => ({
-            ...state,
-            ...data,
-            updated_on: updated_on,
-          }));
-        })
-      )
-    );
+  updateWeather() {
+    const s = this.backend.getPNWeather().subscribe((data) => {
+      const updated_on = new Date();
+      pnweather.update((state) => ({
+        ...state,
+        ...data,
+        updated_on: updated_on,
+      }));
+      s.unsubscribe();
+    });
+
+    // const s = this.backend
+    //   .getPNWeather()
+    //   .pipe(
+    //     tap((data) => {
+    //       const updated_on = new Date();
+    //       pnweather.update((state) => ({
+    //         ...state,
+    //         ...data,
+    //         updated_on: updated_on,
+    //       }));
+    //       s.unsubscribe();
+    //     })
+    //   )
+    //   .subscribe();
   }
 }

@@ -22,6 +22,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
 import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.component';
 import { MapInfoComponent } from './dialogs/map-info/map-info.component';
+import { DrawnFeaturesRepository } from './state/draw';
+import { DrawnGeoJsonComponent } from './dialogs/drawn-geo-json/drawn-geo-json.component';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -39,6 +41,7 @@ export function initElfDevTools(actions: Actions) {
     WelcomeDialogComponent,
     LayerToggleComponent,
     MapInfoComponent,
+    DrawnGeoJsonComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ export function initElfDevTools(actions: Actions) {
     UIRepository,
     PNWeatherRepository,
     MapWhereRepository,
+    DrawnFeaturesRepository,
   ],
   bootstrap: [AppComponent],
 })

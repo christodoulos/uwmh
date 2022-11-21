@@ -6,11 +6,20 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
+import {
+  LngLatBoundsLike,
+  LngLatLike,
+  Map,
+  MapboxGeoJSONFeature,
+} from 'mapbox-gl';
 import { MatDialog } from '@angular/material/dialog';
 import { LayerToggleComponent } from '../dialogs/layer-toggle/layer-toggle.component';
-import { LayersRepository } from '../state';
+import { LayersRepository, PNWeatherRepository } from '../state';
 import { DTMapService } from '../map.service';
+import { map, switchMap, timer } from 'rxjs';
+import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
+import { DrawnFeaturesRepository } from '../state/draw';
+import { DrawnGeoJsonComponent } from '../dialogs/drawn-geo-json/drawn-geo-json.component';
 
 @Component({
   selector: 'uwmh-map',
@@ -27,7 +36,9 @@ export class MapComponent implements OnInit {
   constructor(
     private mapService: DTMapService,
     private dialog: MatDialog,
-    private layers: LayersRepository
+    private layers: LayersRepository,
+    private pnWeather: PNWeatherRepository,
+    private drawn: DrawnFeaturesRepository
   ) {}
   @Input() style = 'mapbox://styles/christodoulos/ckzichi5q001l15p1wpq6sbvs';
   @Input() bounds: LngLatBoundsLike = [
@@ -64,8 +75,38 @@ export class MapComponent implements OnInit {
           });
           s.unsubscribe();
         });
+
+        const draw = new MapboxDraw({
+          displayControlsDefault: true,
+          // Select which mapbox-gl-draw control buttons to add to the map.
+          controls: {
+            polygon: true,
+            trash: true,
+          },
+          // Set mapbox-gl-draw to draw by default.
+          // The user does not have to click the polygon control button first.
+          // defaultMode: 'draw_polygon',
+        });
+        map.addControl(draw);
+
+        map.on('draw.create', () => {
+          const data = draw.getAll();
+          this.drawn.update(data);
+        });
+        map.on('draw.delete', () => {
+          const data = draw.getAll();
+          this.drawn.update(data);
+        });
+        map.on('draw.update', () => {
+          const data = draw.getAll();
+          this.drawn.update(data);
+        });
       }
     });
+
+    timer(0, 10 * 60 * 1000)
+      .pipe(map(() => this.pnWeather.updateWeather()))
+      .subscribe();
   }
 
   onMapLoad(map: Map) {
@@ -73,14 +114,11 @@ export class MapComponent implements OnInit {
   }
 
   toggleLayers() {
-    const dialogRef = this.dialog.open(LayerToggleComponent);
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log(result);
-    //   this.layers.set_layer_visibility('boundary_line', result[0]);
-    //   this.layers.set_layer_visibility('boundary_fill', result[1]);
-    //   this.layers.set_layer_visibility('rivers', result[2]);
-    //   // this.service.show_layers();
-    // });
+    this.dialog.open(LayerToggleComponent);
+  }
+
+  drawnfeatures() {
+    this.dialog.open(DrawnGeoJsonComponent);
   }
 
   streets() {

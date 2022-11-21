@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeoJSONMapSource, Layer, MapWhere } from '@uwmh/data';
 import { AnyLayer, LngLatLike, Map, Popup } from 'mapbox-gl';
-import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
+// import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   LayersRepository,
@@ -75,18 +75,18 @@ export class DTMapService {
       this.setupMapboxLayers();
     });
 
-    const draw = new MapboxDraw({
-      displayControlsDefault: true,
-      // Select which mapbox-gl-draw control buttons to add to the map.
-      controls: {
-        polygon: true,
-        trash: true,
-      },
-      // Set mapbox-gl-draw to draw by default.
-      // The user does not have to click the polygon control button first.
-      // defaultMode: 'draw_polygon',
-    });
-    map.addControl(draw);
+    // const draw = new MapboxDraw({
+    //   displayControlsDefault: true,
+    //   // Select which mapbox-gl-draw control buttons to add to the map.
+    //   controls: {
+    //     polygon: true,
+    //     trash: true,
+    //   },
+    //   // Set mapbox-gl-draw to draw by default.
+    //   // The user does not have to click the polygon control button first.
+    //   // defaultMode: 'draw_polygon',
+    // });
+    // map.addControl(draw);
 
     this.map.on(
       'mousemove',

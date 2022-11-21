@@ -23,6 +23,14 @@
     </div>
   </mgl-control>
 
+  <mgl-control>
+    <div class="mapboxgl-ctrl-group">
+      <button title="Draw Features as GeoJSON" (click)="drawnfeatures()">
+        <mat-icon>area_chart</mat-icon>
+      </button>
+    </div>
+  </mgl-control>
+
   <mgl-control position="bottom-left"
     ><mat-button-toggle-group
       [ngModel]="mapStyle"
