@@ -61,12 +61,24 @@ export class AppService {
     // this.pnrepo.updateWeather();
     this.layers.hide_layer('attica-region-boundary-line');
     this.layers.hide_layer('attica-region-boundary-fill');
+    this.layers.hide_layer('attica-perfecture-rivers');
     this.map.value.flyTo({
       center: [23.781372557061157, 37.988260208268386],
       zoom: 17,
       bearing: 45,
       pitch: 75,
-      duration: 3000,
+      duration: 5000,
+      essential: true,
+    });
+  }
+
+  portara() {
+    this.map.value.flyTo({
+      center: [25.37260003010752, 37.11014654505334],
+      zoom: 18,
+      bearing: 90,
+      pitch: 90,
+      duration: 5000,
       essential: true,
     });
   }

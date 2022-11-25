@@ -63,7 +63,20 @@ export const LayersInit: MapLayers = {
       type: 'Point',
       coordinates: [23.781372557061157, 37.988260208268386],
     },
-    modelUrl: 'https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf',
-    layout_visibility: false,
+    // modelUrl: 'https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf',
+    modelUrl: '/assets/tank.glb',
+    layout_visibility: true,
+  },
+  /////////////////////
+  // Portara @ Naxos //
+  /////////////////////
+  'custom-portara': {
+    id: 'custom-portara',
+    modelOrigin: {
+      type: 'Point',
+      coordinates: [25.37260003010752, 37.11014654505334],
+    },
+    modelUrl: '/assets/portara.glb',
+    layout_visibility: true,
   },
 };

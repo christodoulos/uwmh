@@ -25,4 +25,5 @@ export interface MapLayers {
   'attica-region-boundary-fill': Layer;
   'attica-perfecture-rivers': Layer;
   'custom-athens-plant-nursery': Custom3DModelLayer;
+  'custom-portara': Custom3DModelLayer;
 }

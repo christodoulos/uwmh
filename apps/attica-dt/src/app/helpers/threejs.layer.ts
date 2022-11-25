@@ -1,7 +1,8 @@
 import { MercatorCoordinate, Map, LngLatLike } from 'mapbox-gl';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-// import { IFCLoader } from 'three/examples/jsm/loaders/IFCLoader';
+import { IFCLoader } from 'three/examples/jsm/loaders/IFCLoader';
 import * as THREE from 'three';
+import { v4 } from 'uuid';
 
 export class ThreejsLayer {
   camera: THREE.Camera = new THREE.Camera();
@@ -18,24 +19,36 @@ export class ThreejsLayer {
     //   23.781372557061157, 37.988260208268386,
     // ] as mapboxgl.LngLatLike; // define explicitly to match MercatorCoordinate types
     const modelAltitude = 0;
-    const modelRotate = [Math.PI / 2, 0, 0];
-    const modelScale = 3e-8;
+    // const modelRotate = [Math.PI / 2, 0, 0];
+    const modelRotate = [Math.PI / 2, (3 * Math.PI) / 2, 0];
+
+    const modelAsMercatorCoordinate = MercatorCoordinate.fromLngLat(
+      this.modelOrigin,
+      modelAltitude
+    );
+
+    // const modelScale = 2e-8;
 
     const modelTransform = {
-      translateX: MercatorCoordinate.fromLngLat(this.modelOrigin, modelAltitude)
-        .x,
-      translateY: MercatorCoordinate.fromLngLat(this.modelOrigin, modelAltitude)
-        .y,
-      translateZ: MercatorCoordinate.fromLngLat(this.modelOrigin, modelAltitude)
-        .z,
+      // translateX: MercatorCoordinate.fromLngLat(this.modelOrigin, modelAltitude)
+      //   .x,
+      // translateY: MercatorCoordinate.fromLngLat(this.modelOrigin, modelAltitude)
+      //   .y,
+      // translateZ: MercatorCoordinate.fromLngLat(this.modelOrigin, modelAltitude)
+      //   .z,
+      translateX: modelAsMercatorCoordinate.x,
+      translateY: modelAsMercatorCoordinate.y,
+      translateZ: modelAsMercatorCoordinate.z,
       rotateX: modelRotate[0],
       rotateY: modelRotate[1],
       rotateZ: modelRotate[2],
-      scale: modelScale,
+      // scale: modelScale,
+      scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits(),
     };
 
     this.customLayer = <mapboxgl.CustomLayerInterface>{
-      id: '3d-model',
+      // id: '3d-model',
+      id: v4(),
       type: 'custom',
       renderingMode: '3d',
       // source: 'composite',
@@ -63,9 +76,9 @@ export class ThreejsLayer {
         );
         // const loader = new IFCLoader();
         // loader.load(
-        //   '/assets/pump.ifc',
+        //   this.modelURL,
         //   ((ifc: any) => {
-        //     this.scene?.add(ifc.mesh);
+        //     this.scene.add(ifc.mesh);
         //   }).bind(this)
         // );
 

@@ -77,4 +77,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   nursery() {
     this.service.nursery();
   }
+
+  portara() {
+    this.service.portara();
+  }
 }

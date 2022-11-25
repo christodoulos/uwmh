@@ -18,13 +18,15 @@ export class LayersRepository {
   attica_boundary_fill$ = layers.pipe( select((state) => state['attica-region-boundary-fill']) );
   attica_rivers$ = layers.pipe(select((state) => state['attica-perfecture-rivers']));
   athens_plant_nurcery$ = layers.pipe( select((state) => state['custom-athens-plant-nursery']) );
+  portara$ = layers.pipe(select(state=>state['custom-portara']))
   geojson_layers$ = ObservableOf([
     this.attica_boundary_line$,
     this.attica_boundary_fill$,
     this.attica_rivers$,
   ]);
   custom_3d_layers$ = ObservableOf([
-    this.athens_plant_nurcery$
+    this.athens_plant_nurcery$,
+    this.portara$
   ])
   
   layer_visibility_change$ = new BehaviorSubject(uuidv4())
