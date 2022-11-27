@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LayersRepository, PNWeatherRepository } from './state';
 
 import { DTMapService } from './map.service';
+import { PNPLCEntities } from './state/pnplc';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,8 @@ export class AppService {
   constructor(
     private mapService: DTMapService,
     private layers: LayersRepository,
-    private pnrepo: PNWeatherRepository
+    private pnrepo: PNWeatherRepository,
+    private pnplc: PNPLCEntities
   ) {
     // this.pnNeedsUpdate$.subscribe((needsUpdate) => {
     //   if (needsUpdate) {

@@ -24,6 +24,7 @@ import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.compon
 import { MapInfoComponent } from './dialogs/map-info/map-info.component';
 import { DrawnFeaturesRepository } from './state/draw';
 import { DrawnGeoJsonComponent } from './dialogs/drawn-geo-json/drawn-geo-json.component';
+import { PNPLCEntities } from './state/pnplc';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -74,6 +75,7 @@ export function initElfDevTools(actions: Actions) {
     PNWeatherRepository,
     MapWhereRepository,
     DrawnFeaturesRepository,
+    PNPLCEntities,
   ],
   bootstrap: [AppComponent],
 })

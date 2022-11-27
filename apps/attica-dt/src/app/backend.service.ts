@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AtticaIndex, Boundary, PNWeather, River } from '@uwmh/data';
+import { AtticaIndex, Boundary, PNPLC, PNWeather, River } from '@uwmh/data';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +24,9 @@ export class BackendService {
 
   getPNWeather() {
     return this.http.get<PNWeather>('/api/nursery/latest');
+  }
+
+  getPNPLCEntities() {
+    return this.http.get<PNPLC[]>('/api/nursery/plc');
   }
 }
