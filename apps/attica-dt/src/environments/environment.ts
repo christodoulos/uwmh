@@ -1,9 +1,11 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { MAPBOX_ACCESS_TOKEN } from './env';
 
 export const environment = {
   production: false,
+  mapbox_access_token: MAPBOX_ACCESS_TOKEN,
 };
 
 /*

@@ -18,7 +18,7 @@ import { NurseryModule } from './nursery/nursery.module';
       rootPath: join(__dirname, '..', 'attica-dt'),
       exclude: ['/api*'],
     }),
-    MongooseModule.forRoot(process.env.DATABASE_URI),
+    MongooseModule.forRoot('mongodb://localhost:27017/attica-dt-beta'),
     MongooseModule.forFeature([
       {
         name: Attica.name,

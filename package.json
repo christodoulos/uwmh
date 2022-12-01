@@ -7,7 +7,8 @@
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js",
     "start": "nx serve",
-    "build": "npm run clean && nx build --prod && nx build attica-dt-api --prod && scp -r dist/apps/* atticadt:atticadt/webapp && scp .env atticadt:atticadt && scp package.json atticadt:atticadt",
+    "build": "npm run clean && nx build --prod && nx build attica-dt-api --prod",
+    "deploy": "rsync --delete -a -e ssh dist/apps/* atticadt@atticadt:webapp",
     "build:stats": "nx build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/apps/attica-dt/stats.json",
     "test": "nx test"

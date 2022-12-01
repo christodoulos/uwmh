@@ -4,7 +4,7 @@ import { NurseryService } from './nursery.service';
 @Controller('nursery')
 export class NurseryController {
   constructor(private readonly service: NurseryService) {
-    this.plc_get_latest().then((data) => console.log(data));
+    // this.plc_get_latest().then((data) => console.log(data));
   }
 
   @Get()

@@ -1,34 +1,35 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <button
-      mat-icon-button
-      *ngIf="sidenav.mode === 'over'"
-      (click)="sidenav.toggle()"
-    >
-      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-    </button>
-    Attica Digital Twin
-    <span class="spacer"></span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="mat-typography">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button
+        mat-icon-button
+        *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+      </button>
+      Attica Digital Twin
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<mat-sidenav-container>
-  <!-- left sidenav -->
-  <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
-    <img class="avatar" src="/assets/logo.png" />
-    <mat-nav-list>
-      <h4 matSubheader>Quick Navigation</h4>
-      <a mat-list-item (click)="attica_bounds()">Attica Region</a>
-      <a mat-list-item (click)="rivers()">Attica Perfecture</a>
-      <a mat-list-item (click)="nursery()"> Plant Nursery</a>
-      <a mat-list-item (click)="portara()"> Apollon Temple Naxos</a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="content">
-      <uwmh-map (mapEvent)="onMapEvent($event)"></uwmh-map>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-sidenav-container>
+    <!-- left sidenav -->
+    <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
+      <img class="avatar" src="/assets/logo.png" />
+      <mat-nav-list>
+        <h4 matSubheader>Quick Navigation</h4>
+        <a mat-list-item (click)="attica_bounds()">Attica Region</a>
+        <a mat-list-item (click)="rivers()">Rivers of Attica</a>
+        <a mat-list-item (click)="nursery()">Athens Plant Nursery</a>
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="content">
+        <uwmh-map (mapEvent)="onMapEvent($event)"></uwmh-map>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

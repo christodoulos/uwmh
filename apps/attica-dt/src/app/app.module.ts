@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
+import { environment } from '../environments/environment';
 
 import { MaterialModule } from './material/material.module';
 import {
@@ -58,17 +59,18 @@ export function initElfDevTools(actions: Actions) {
     HttpClientModule,
     MaterialModule,
     NgxMapboxGLModule.withConfig({
-      accessToken:
-        'pk.eyJ1IjoiY2hyaXN0b2RvdWxvcyIsImEiOiJja3luYTd3eW0ydGFiMm9xcHRmMGJyOHVrIn0.c1mSurunkjU4Wyf2hxcy0g',
+      accessToken: environment.mapbox_access_token,
     }),
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: initElfDevTools,
-      deps: [Actions],
-    },
+    !environment.production
+      ? {
+          provide: APP_INITIALIZER,
+          multi: true,
+          useFactory: initElfDevTools,
+          deps: [Actions],
+        }
+      : [],
     SourcesRepository,
     LayersRepository,
     UIRepository,
