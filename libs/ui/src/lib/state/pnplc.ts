@@ -8,14 +8,14 @@ import {
 } from '@ngneat/elf-entities';
 import { PNPLC } from '@uwmh/data';
 import { map } from 'rxjs';
-import { BackendService } from '../backend.service';
+import { UiBackendService } from './backend.service';
 
 const store = createStore({ name: 'pnplc' }, withEntities<PNPLC>());
 
 @Injectable({ providedIn: 'root' })
 export class PNPLCEntities {
   allEntities$ = store.pipe(selectAllEntities());
-  constructor(private backend: BackendService) {
+  constructor(private backend: UiBackendService) {
     this.backend.getPNPLCEntities().subscribe((values) => {
       store.update(setEntities(values));
     });

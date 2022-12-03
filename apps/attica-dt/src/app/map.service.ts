@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { GeoJSONMapSource, Layer, MapWhere } from '@uwmh/data';
+import { GeoJSONMapSource, Layer } from '@uwmh/data';
 import { AnyLayer, LngLatLike, Map, Popup } from 'mapbox-gl';
-// import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   LayersRepository,
   SourcesRepository,
-  PNWeatherRepository,
   MapWhereRepository,
 } from './state';
 import { ThreejsLayer } from './helpers';
@@ -28,7 +26,6 @@ export class DTMapService {
   constructor(
     private sources: SourcesRepository,
     private layers: LayersRepository,
-    private pnweather: PNWeatherRepository,
     private mapwhere: MapWhereRepository,
     private dialog: MatDialog
   ) {
@@ -75,19 +72,6 @@ export class DTMapService {
       this.setupMapboxLayers();
     });
 
-    // const draw = new MapboxDraw({
-    //   displayControlsDefault: true,
-    //   // Select which mapbox-gl-draw control buttons to add to the map.
-    //   controls: {
-    //     polygon: true,
-    //     trash: true,
-    //   },
-    //   // Set mapbox-gl-draw to draw by default.
-    //   // The user does not have to click the polygon control button first.
-    //   // defaultMode: 'draw_polygon',
-    // });
-    // map.addControl(draw);
-
     this.map.on(
       'mousemove',
       debounce((e) => this.mapwhere.update(mapQuery(e, map)), 100)
@@ -102,10 +86,6 @@ export class DTMapService {
       });
       s.unsubscribe();
     });
-    // this.map.on('mouseleave', () => {
-    //   console.log('lala');
-    //   popup.remove();
-    // });
   }
 
   setupMapboxSources() {

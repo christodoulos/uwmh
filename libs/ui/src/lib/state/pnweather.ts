@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
 import { PNWeather, PNWeatherInit } from '@uwmh/data';
 import { lastValueFrom, map, tap } from 'rxjs';
-import { BackendService } from '../backend.service';
+import { UiBackendService } from './backend.service';
 
 const pnweather = createStore(
   { name: 'pnweather' },
@@ -18,7 +18,7 @@ export class PNWeatherRepository {
   );
   weatherData$ = pnweather.pipe(select((state) => state));
 
-  constructor(private backend: BackendService) {}
+  constructor(private backend: UiBackendService) {}
 
   updateWeather() {
     const s = this.backend.getPNWeather().subscribe((data) => {

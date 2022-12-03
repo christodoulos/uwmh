@@ -14,9 +14,8 @@ import {
 } from 'mapbox-gl';
 import { MatDialog } from '@angular/material/dialog';
 import { LayerToggleComponent } from '../dialogs/layer-toggle/layer-toggle.component';
-import { LayersRepository, PNWeatherRepository } from '../state';
+import { LayersRepository } from '../state';
 import { DTMapService } from '../map.service';
-import { map, switchMap, timer } from 'rxjs';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { DrawnFeaturesRepository } from '../state/draw';
 import { DrawnGeoJsonComponent } from '../dialogs/drawn-geo-json/drawn-geo-json.component';
@@ -37,7 +36,6 @@ export class MapComponent implements OnInit {
     private mapService: DTMapService,
     private dialog: MatDialog,
     private layers: LayersRepository,
-    private pnWeather: PNWeatherRepository,
     private drawn: DrawnFeaturesRepository
   ) {}
   @Input() style = 'mapbox://styles/christodoulos/ckzichi5q001l15p1wpq6sbvs';
@@ -103,10 +101,6 @@ export class MapComponent implements OnInit {
         });
       }
     });
-
-    timer(0, 10 * 60 * 1000)
-      .pipe(map(() => this.pnWeather.updateWeather()))
-      .subscribe();
   }
 
   onMapLoad(map: Map) {

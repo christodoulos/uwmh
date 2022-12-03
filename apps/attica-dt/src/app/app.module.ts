@@ -8,14 +8,15 @@ import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 import { environment } from '../environments/environment';
 
-import { MaterialModule } from './material/material.module';
 import {
   LayersRepository,
   MapWhereRepository,
-  PNWeatherRepository,
   SourcesRepository,
   UIRepository,
 } from './state';
+
+import { MaterialModule } from '@uwmh/material';
+import { UiModule } from '@uwmh/ui';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -25,7 +26,6 @@ import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.compon
 import { MapInfoComponent } from './dialogs/map-info/map-info.component';
 import { DrawnFeaturesRepository } from './state/draw';
 import { DrawnGeoJsonComponent } from './dialogs/drawn-geo-json/drawn-geo-json.component';
-import { PNPLCEntities } from './state/pnplc';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -56,6 +56,7 @@ export function initElfDevTools(actions: Actions) {
       //     import('./public/public.module').then((m) => m.PublicModule),
       // },
     ]),
+    UiModule,
     HttpClientModule,
     MaterialModule,
     NgxMapboxGLModule.withConfig({
@@ -74,10 +75,8 @@ export function initElfDevTools(actions: Actions) {
     SourcesRepository,
     LayersRepository,
     UIRepository,
-    PNWeatherRepository,
     MapWhereRepository,
     DrawnFeaturesRepository,
-    PNPLCEntities,
   ],
   bootstrap: [AppComponent],
 })

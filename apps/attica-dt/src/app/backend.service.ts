@@ -21,12 +21,4 @@ export class BackendService {
     // console.log('getRivers', ids);
     return this.http.post<River[]>('/api/river/', ids);
   }
-
-  getPNWeather() {
-    return this.http.get<PNWeather>('/api/nursery/latest');
-  }
-
-  getPNPLCEntities() {
-    return this.http.get<PNPLC[]>('/api/nursery/plc');
-  }
 }

@@ -1,34 +1,16 @@
 import { Injectable } from '@angular/core';
-import { LayersRepository, PNWeatherRepository } from './state';
-
+import { LayersRepository } from './state';
 import { DTMapService } from './map.service';
-import { PNPLCEntities } from './state/pnplc';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
   map = this.mapService.mapSubject;
-  pnNeedsUpdate$ = this.pnrepo.needsUpdate$;
   constructor(
     private mapService: DTMapService,
-    private layers: LayersRepository,
-    private pnrepo: PNWeatherRepository,
-    private pnplc: PNPLCEntities
-  ) {
-    // this.pnNeedsUpdate$.subscribe((needsUpdate) => {
-    //   if (needsUpdate) {
-    //     this.pnrepo.updateWeather();
-    //   }
-    // });
-    // setTimeout(() => {
-    //   this.scheduled_tasks();
-    // }, 60 * 1000);
-  }
-
-  scheduled_tasks() {
-    this.pnrepo.updateWeather();
-  }
+    private layers: LayersRepository
+  ) {}
 
   boundary_zoom() {
     this.layers.show_layer('attica-region-boundary-line');
@@ -60,7 +42,6 @@ export class AppService {
   }
 
   nursery() {
-    // this.pnrepo.updateWeather();
     this.layers.hide_layer('attica-region-boundary-line');
     this.layers.hide_layer('attica-region-boundary-fill');
     this.layers.hide_layer('attica-perfecture-rivers');
