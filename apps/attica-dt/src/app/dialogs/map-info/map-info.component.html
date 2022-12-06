@@ -2,8 +2,8 @@
 <mat-tab-group>
   <mat-tab label="Video"
     ><iframe
-      width="560"
-      height="315"
+      width="100%"
+      height="400"
       src="https://www.youtube.com/embed/B6m7JLbRJUQ"
       title="YouTube video player"
       frameborder="0"
@@ -17,5 +17,27 @@
 
   <mat-tab label="PLC Data">
     <uwmh-plant-nursery-plc></uwmh-plant-nursery-plc>
+  </mat-tab>
+
+  <mat-tab label="Plots">
+    <mat-form-field>
+      <mat-label>Select a measurement</mat-label>
+      <mat-select [(ngModel)]="selection">
+        <mat-option value="0">Temperature membrane tank 5</mat-option>
+        <mat-option value="1">LT1 (pH membrane tank 5)</mat-option>
+        <mat-option value="2">DO ppm LDO aeriation tank 4A</mat-option>
+        <mat-option value="3">DO ppm anoxic tank3</mat-option>
+        <mat-option value="4">MLSS SOLID mg/l membrane tank 5</mat-option>
+        <mat-option value="5">MLSS SOLID mg/l membrane tank 4A</mat-option>
+        <mat-option value="6">LDO DO ppm anoxic</mat-option>
+        <mat-option value="7">Temperature anoxic tank</mat-option>
+        <mat-option value="8">Turbidity NTU tank 10</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <uwmh-line-plot
+      [xvalues]="(ts$ | async) ?? []"
+      [yvalues]="(values$ | async) ?? []"
+      [series]="selection.toString()"
+    ></uwmh-line-plot>
   </mat-tab>
 </mat-tab-group>
