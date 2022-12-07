@@ -34,6 +34,14 @@ export class LinePlotComponent implements OnChanges {
         xAxis: {
           type: 'category',
           name: 'Date',
+          axisLabel: {
+            formatter: (v: string) =>
+              new Date(v).toLocaleDateString('default', {
+                month: 'short',
+                day: '2-digit',
+              }),
+            rich: {},
+          },
         },
         yAxis: {},
         series: [
