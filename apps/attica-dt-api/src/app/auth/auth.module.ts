@@ -6,7 +6,6 @@ import { UserController } from './user.controller';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { GoogleOauthGuard } from './guards/google-oauth.guard';
@@ -29,7 +28,6 @@ import { GoogleOauthGuard } from './guards/google-oauth.guard';
   providers: [
     UserService,
     AuthService,
-    GoogleStrategy,
     JwtStrategy,
     JwtAuthGuard,
     GoogleOauthGuard,
