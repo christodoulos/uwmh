@@ -11,6 +11,8 @@ import { AppService } from './app.service';
 import { DTMapService } from './map.service';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
 import { UIRepository } from './state';
+import { BackendService } from './backend.service';
+import { UserRepository } from './state/user';
 
 @UntilDestroy()
 @Component({
@@ -21,13 +23,18 @@ import { UIRepository } from './state';
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
 
+  isLoggedIn$ = this.user.isLoggedIn$;
+  username$ = this.user.name$;
+  userPicture$ = this.user.picture$;
   constructor(
     private mapService: DTMapService,
     private service: AppService,
+    private backend: BackendService,
     private observer: BreakpointObserver,
     private router: Router,
     private dialog: MatDialog,
-    private ui: UIRepository
+    private ui: UIRepository,
+    private user: UserRepository
   ) {}
 
   ngOnInit() {
@@ -81,4 +88,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   portara() {
     this.service.portara();
   }
+
+  // login() {
+  //   //
+  //   this.backend.login();
+  // }
 }

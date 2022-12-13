@@ -1,0 +1,22 @@
+<div mat-dialog-title>
+  <img src="{{ data.picture }}" /> Welcome {{ data.given_name }}
+</div>
+
+<div mat-dialog-content>
+  <p>
+    By pressing the Sign Up button we are going to subscribe you to
+    <span class="font-medium">Attica Digital Twin</span> as
+    <span class="font-medium">{{ data.name }}</span> with your email
+    <span class="font-medium">{{ data.email }}</span
+    >. Please provide the following optional information:
+  </p>
+  <mat-form-field>
+    <mat-label>Linkedin Profile</mat-label>
+    <input matInput [(ngModel)]="data.linkedin" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-button [mat-dialog-close]="data">Sign Up</button>
+</div>

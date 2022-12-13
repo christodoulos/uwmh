@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -18,28 +18,29 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatSlideToggleModule,
-    MatTabsModule,
-  ],
+  // imports: [
+  //   CommonModule,
+  //   MatInputModule,
+  //   MatCardModule,
+  //   MatButtonModule,
+  //   MatButtonToggleModule,
+  //   MatSidenavModule,
+  //   MatListModule,
+  //   MatIconModule,
+  //   MatToolbarModule,
+  //   MatProgressSpinnerModule,
+  //   MatMenuModule,
+  //   MatTableModule,
+  //   MatPaginatorModule,
+  //   MatSortModule,
+  //   MatSelectModule,
+  //   MatDialogModule,
+  //   MatSlideToggleModule,
+  //   MatTabsModule,
+  // ],
   exports: [
     MatInputModule,
     MatCardModule,
@@ -58,6 +59,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatDialogModule,
     MatSlideToggleModule,
     MatTabsModule,
+    MatTooltipModule,
   ],
 })
 export class MaterialModule {}

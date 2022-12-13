@@ -8,6 +8,7 @@ import { Attica, AtticaSchema } from './app.schema';
 
 import { join } from 'path';
 
+import { AuthModule } from './auth/auth.module';
 import { BoundaryModule } from './boundary/boundary.module';
 import { RiverModule } from './river/river.module';
 import { NurseryModule } from './nursery/nursery.module';
@@ -25,6 +26,7 @@ import { NurseryModule } from './nursery/nursery.module';
         schema: AtticaSchema,
       },
     ]),
+    AuthModule,
     BoundaryModule,
     RiverModule,
     NurseryModule,

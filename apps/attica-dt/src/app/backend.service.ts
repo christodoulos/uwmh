@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AtticaIndex, Boundary, PNPLC, PNWeather, River } from '@uwmh/data';
+import { AtticaIndex, Boundary, River, UserDTO } from '@uwmh/data';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getAtticaIndex() {
     // console.log('getAtticaIndex');
@@ -20,5 +22,13 @@ export class BackendService {
   getRivers(ids: string[]) {
     // console.log('getRivers', ids);
     return this.http.post<River[]>('/api/river/', ids);
+  }
+
+  getUserByEmail(email: string): Observable<UserDTO | null> {
+    return this.http.post<UserDTO | null>('/api/auth/user', { email });
+  }
+
+  signUpUser(user: UserDTO): Observable<string> {
+    return this.http.post<string>('/api/auth/user/signup', { user });
   }
 }

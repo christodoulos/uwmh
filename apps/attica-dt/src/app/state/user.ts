@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { createStore, withProps, select } from '@ngneat/elf';
+import { GoogleUserInfo, DTUser, UserDTO } from '@uwmh/data';
+
+const user = createStore(
+  { name: 'user' },
+  withProps<UserDTO>({
+    email: '',
+    name: '',
+    given_name: '',
+    family_name: '',
+    picture: '',
+  })
+);
+
+@Injectable()
+export class UserRepository {
+  name$ = user.pipe(select((state) => state.name));
+  email$ = user.pipe(select((state) => state.email));
+  picture$ = user.pipe(select((state) => state.picture));
+  isLoggedIn$ = user.pipe(select((state) => (state.email ? true : false)));
+
+  updateUser(data: UserDTO) {
+    user.update(() => ({ ...data }));
+  }
+}

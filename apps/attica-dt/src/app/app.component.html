@@ -1,6 +1,6 @@
-<div class="mat-typography">
-  <mat-toolbar>
-    <mat-toolbar-row>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="flex flex-row items-center space-x-4">
       <button
         mat-icon-button
         *ngIf="sidenav.mode === 'over'"
@@ -9,27 +9,57 @@
         <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
         <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
       </button>
-      Attica Digital Twin
-      <span class="spacer"></span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+      <span>Attica Digital Twin</span>
 
-  <mat-sidenav-container>
-    <!-- left sidenav -->
-    <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
-      <img class="avatar" src="/assets/logo.png" />
-      <mat-nav-list>
-        <h4 matSubheader>Quick Navigation</h4>
-        <a mat-list-item (click)="attica_bounds()">Attica Region</a>
-        <a mat-list-item (click)="rivers()">Rivers of Attica</a>
-        <a mat-list-item (click)="nursery()">Athens Plant Nursery</a>
-      </mat-nav-list>
-      <mat-divider></mat-divider>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="content">
-        <uwmh-map (mapEvent)="onMapEvent($event)"></uwmh-map>
+      <!-- <span class="spacer"></span> -->
+
+      <uwmh-google-signin
+        *ngIf="(isLoggedIn$ | async) === false"
+      ></uwmh-google-signin>
+
+      <div class="flex items-center" *ngIf="isLoggedIn$ | async">
+        <button
+          mat-icon-button
+          [matTooltip]="(username$ | async) ?? ''"
+          [matTooltipClass]="'text-sm'"
+          [matMenuTriggerFor]="menu"
+        >
+          <img class="circle" src="{{ userPicture$ | async }}" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voice mail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- left sidenav -->
+  <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
+    <img class="avatar" src="/assets/logo.png" />
+    <mat-nav-list>
+      <h4 matSubheader>Quick Navigation</h4>
+      <a mat-list-item (click)="attica_bounds()">Attica Region</a>
+      <a mat-list-item (click)="rivers()">Rivers of Attica</a>
+      <a mat-list-item (click)="nursery()">Athens Plant Nursery</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content">
+      <uwmh-map (mapEvent)="onMapEvent($event)"></uwmh-map>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

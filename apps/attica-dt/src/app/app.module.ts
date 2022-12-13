@@ -26,6 +26,9 @@ import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.compon
 import { MapInfoComponent } from './dialogs/map-info/map-info.component';
 import { DrawnFeaturesRepository } from './state/draw';
 import { DrawnGeoJsonComponent } from './dialogs/drawn-geo-json/drawn-geo-json.component';
+import { GoogleSigninComponent } from './google-signin/google-signin.component';
+import { UserRepository } from './state/user';
+import { SignUpComponent } from './dialogs/sign-up/sign-up.component';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -44,6 +47,8 @@ export function initElfDevTools(actions: Actions) {
     LayerToggleComponent,
     MapInfoComponent,
     DrawnGeoJsonComponent,
+    GoogleSigninComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ export function initElfDevTools(actions: Actions) {
       //   loadChildren: () =>
       //     import('./public/public.module').then((m) => m.PublicModule),
       // },
+      { path: 'google-login', redirectTo: '/api/auth/google' },
     ]),
     UiModule,
     HttpClientModule,
@@ -77,6 +83,7 @@ export function initElfDevTools(actions: Actions) {
     UIRepository,
     MapWhereRepository,
     DrawnFeaturesRepository,
+    UserRepository,
   ],
   bootstrap: [AppComponent],
 })
