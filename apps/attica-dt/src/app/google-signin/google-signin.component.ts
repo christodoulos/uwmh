@@ -9,6 +9,7 @@ import { BackendService } from '../backend.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SignUpComponent } from '../dialogs/sign-up/sign-up.component';
 import { Subscription } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'uwmh-google-signin',
@@ -21,7 +22,8 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
     private ngZone: NgZone,
     private user: UserRepository,
     private backend: BackendService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private jwtHelper: JwtHelperService
   ) {}
 
   ngOnDestroy(): void {
@@ -52,14 +54,15 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
   }
 
   continueWithGoogle(token: string) {
-    const { email, name, given_name, picture } = this.decodeJwtResponse(token);
+    const { email, name, given_name, picture } =
+      this.jwtHelper.decodeToken(token);
 
     this.subscription = this.backend
       .getUserByEmail(email)
       .subscribe((data: UserDTO | null) => {
         if (data) {
-          this.backend.signInUser(token).subscribe((jwt) => {
-            console.log(jwt);
+          this.backend.signInUser(token).subscribe((d) => {
+            console.log(this.jwtHelper.decodeToken(d.jwt));
             // Should we decode the backend's jwt here?
             this.user.updateUser(data);
           });
@@ -74,26 +77,28 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
           });
           dialogRef.afterClosed().subscribe((data: UserDTO) => {
             this.backend.signUpUser(token, data).subscribe((data) => {
-              console.log(data, this.decodeJwtResponse(data.jwt));
-              this.user.updateUser(this.decodeJwtResponse(data.jwt));
+              console.log(data, this.jwtHelper.decodeToken(data.jwt)['_doc']);
+              this.user.updateUser(
+                this.jwtHelper.decodeToken(data.jwt)['_doc']
+              );
             });
           });
         }
       });
   }
 
-  decodeJwtResponse(token: string): UserDTO {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join('')
-    );
-    return JSON.parse(jsonPayload) as UserDTO;
-  }
+  // decodeJwtResponse(token: string): UserDTO {
+  //   const base64Url = token.split('.')[1];
+  //   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  //   const jsonPayload = decodeURIComponent(
+  //     window
+  //       .atob(base64)
+  //       .split('')
+  //       .map(function (c) {
+  //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  //       })
+  //       .join('')
+  //   );
+  //   return JSON.parse(jsonPayload) as UserDTO;
+  // }
 }

@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 import { environment } from '../environments/environment';
@@ -60,10 +61,16 @@ export function initElfDevTools(actions: Actions) {
       //   loadChildren: () =>
       //     import('./public/public.module').then((m) => m.PublicModule),
       // },
-      { path: 'google-login', redirectTo: '/api/auth/google' },
     ]),
     UiModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+      },
+    }),
     MaterialModule,
     NgxMapboxGLModule.withConfig({
       accessToken: environment.mapbox_access_token,

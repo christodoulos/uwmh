@@ -3,7 +3,14 @@ import { HydratedDocument } from 'mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema({ collection: 'users' })
+@Schema({
+  collection: 'users',
+  toJSON: {
+    transform: function (_doc, ret) {
+      delete ret._id;
+    },
+  },
+})
 export class User {
   @Prop()
   provider: string;

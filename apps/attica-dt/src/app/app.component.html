@@ -11,8 +11,6 @@
       </button>
       <span>Attica Digital Twin</span>
 
-      <!-- <span class="spacer"></span> -->
-
       <uwmh-google-signin
         *ngIf="(isLoggedIn$ | async) === false"
       ></uwmh-google-signin>
@@ -21,6 +19,7 @@
         <button
           mat-icon-button
           [matTooltip]="(username$ | async) ?? ''"
+          [matTooltipPosition]="'after'"
           [matTooltipClass]="'text-sm'"
           [matMenuTriggerFor]="menu"
         >
