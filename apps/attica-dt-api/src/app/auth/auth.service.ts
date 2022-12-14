@@ -16,8 +16,10 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  generateJwt(payload: UserDTO) {
-    return this.jwtService.sign(payload);
+  generateJwt(payload: UserDTO): string {
+    const jwt = this.jwtService.sign(payload);
+    console.log(jwt);
+    return jwt;
   }
 
   async signIn(userDTO: UserDTO) {
@@ -29,13 +31,9 @@ export class AuthService {
     return this.generateJwt({ ...user });
   }
 
-  async registerUser(u: UserDTO) {
-    const user = await this.userModel.create({
-      provider: 'google',
-      providerId: 'aa',
-      ...u,
-    });
-    return this.generateJwt({ ...user });
+  async registerUser(user: UserDTO) {
+    const createdUser = await this.userModel.create(user);
+    return this.generateJwt({ ...createdUser });
     // try {
     //   const user = await this.userModel.create(userDTO);
     //   return this.generateJwt(user);

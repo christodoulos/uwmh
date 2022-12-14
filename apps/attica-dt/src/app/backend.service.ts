@@ -28,7 +28,7 @@ export class BackendService {
     return this.http.post<UserDTO | null>('/api/auth/user', { email });
   }
 
-  signUpUser(user: UserDTO): Observable<string> {
-    return this.http.post<string>('/api/auth/user/signup', { user });
+  signUpUser(token: string, user: UserDTO): Observable<string> {
+    return this.http.post<string>('/api/auth/user/signup', { token, user });
   }
 }

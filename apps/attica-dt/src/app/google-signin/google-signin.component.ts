@@ -52,7 +52,7 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
   }
 
   continueWithGoogle(token: string) {
-    const { email, name, given_name, family_name, picture } =
+    const { email, name, given_name, family_name, picture, sub } =
       this.decodeJwtResponse(token);
 
     this.subscription = this.backend
@@ -62,11 +62,17 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
           this.user.updateUser(data);
         } else {
           const dialogRef = this.dialog.open(SignUpComponent, {
-            data: { email, name, given_name, family_name, picture },
+            data: {
+              email,
+              name,
+              given_name,
+              family_name,
+              picture,
+            },
           });
           dialogRef.afterClosed().subscribe((data: UserDTO) => {
-            console.log('DDDDDDDDDDDDDDATA', data);
-            this.backend.signUpUser(data).subscribe((jwt) => {
+            console.log('LLLLLLLLLLLLLLLL', data);
+            this.backend.signUpUser(token, data).subscribe((jwt) => {
               console.log(jwt);
             });
           });

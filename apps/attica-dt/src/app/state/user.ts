@@ -10,6 +10,8 @@ const user = createStore(
     given_name: '',
     family_name: '',
     picture: '',
+    provider: '',
+    providerId: '',
   })
 );
 
