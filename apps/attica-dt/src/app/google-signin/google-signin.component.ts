@@ -73,15 +73,16 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
             },
           });
           dialogRef.afterClosed().subscribe((data: UserDTO) => {
-            this.backend.signUpUser(token, data).subscribe((jwt) => {
-              console.log(jwt);
+            this.backend.signUpUser(token, data).subscribe((data) => {
+              console.log(data, this.decodeJwtResponse(data.jwt));
+              this.user.updateUser(this.decodeJwtResponse(data.jwt));
             });
           });
         }
       });
   }
 
-  decodeJwtResponse(token: string): GoogleUserInfo {
+  decodeJwtResponse(token: string): UserDTO {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(
@@ -93,6 +94,6 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
         })
         .join('')
     );
-    return JSON.parse(jsonPayload) as GoogleUserInfo;
+    return JSON.parse(jsonPayload) as UserDTO;
   }
 }
