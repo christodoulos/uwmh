@@ -18,7 +18,6 @@ export class AuthService {
 
   generateJwt(payload: UserDTO): string {
     const jwt = this.jwtService.sign(payload);
-    console.log(jwt);
     return jwt;
   }
 
@@ -34,12 +33,6 @@ export class AuthService {
   async registerUser(user: UserDTO) {
     const createdUser = await this.userModel.create(user);
     return this.generateJwt({ ...createdUser });
-    // try {
-    //   const user = await this.userModel.create(userDTO);
-    //   return this.generateJwt(user);
-    // } catch {
-    //   throw new InternalServerErrorException();
-    // }
   }
 
   async findUserByEmail(email: string): Promise<UserDTO | null> {

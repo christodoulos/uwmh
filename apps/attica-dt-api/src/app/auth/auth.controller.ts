@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpStatus,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { OAuth2Client } from 'google-auth-library';
 import { GoogleAuthPayload, UserDTO } from '@uwmh/data';
@@ -27,7 +18,6 @@ export class AuthController {
     const client = new OAuth2Client();
     let payload: GoogleAuthPayload;
     const verify = async () => {
-      console.log(body);
       const ticket = await client.verifyIdToken({
         idToken: body.token,
         audience:
@@ -46,9 +36,10 @@ export class AuthController {
         linkedin,
         ...provider,
       };
-      return this.authService.registerUser(user);
+      const jwt = await this.authService.registerUser(user);
+      return { jwt };
     };
     // proceed to verification
-    verify().catch(console.error);
+    return verify().catch(console.error);
   }
 }
