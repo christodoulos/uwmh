@@ -11,7 +11,6 @@ import { AppService } from './app.service';
 import { DTMapService } from './map.service';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
 import { UIRepository } from './state';
-import { BackendService } from './backend.service';
 import { UserRepository } from './state/user';
 
 @UntilDestroy()
@@ -29,7 +28,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private mapService: DTMapService,
     private service: AppService,
-    private backend: BackendService,
     private observer: BreakpointObserver,
     private router: Router,
     private dialog: MatDialog,
@@ -89,8 +87,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.service.portara();
   }
 
-  // login() {
-  //   //
-  //   this.backend.login();
-  // }
+  logout() {
+    this.service.logout();
+  }
 }

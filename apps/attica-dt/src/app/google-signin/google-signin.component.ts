@@ -3,7 +3,7 @@ declare let google: any;
 import { AfterViewInit, Component, NgZone, OnDestroy } from '@angular/core';
 import { accounts } from 'google-one-tap';
 import { environment } from '../../environments/environment';
-import { GoogleUserInfo, UserDTO } from '@uwmh/data';
+import { UserDTO } from '@uwmh/data';
 import { UserRepository } from '../state/user';
 import { BackendService } from '../backend.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -64,7 +64,8 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
           this.backend.signInUser(token).subscribe((d) => {
             console.log(this.jwtHelper.decodeToken(d.jwt));
             // Should we decode the backend's jwt here?
-            this.user.updateUser(data);
+            this.user.updateUser(this.jwtHelper.decodeToken(d.jwt)['_doc']);
+            localStorage.setItem('access_token', d.jwt);
           });
         } else {
           const dialogRef = this.dialog.open(SignUpComponent, {
@@ -81,24 +82,10 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
               this.user.updateUser(
                 this.jwtHelper.decodeToken(data.jwt)['_doc']
               );
+              localStorage.setItem('access_token', data.jwt);
             });
           });
         }
       });
   }
-
-  // decodeJwtResponse(token: string): UserDTO {
-  //   const base64Url = token.split('.')[1];
-  //   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  //   const jsonPayload = decodeURIComponent(
-  //     window
-  //       .atob(base64)
-  //       .split('')
-  //       .map(function (c) {
-  //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  //       })
-  //       .join('')
-  //   );
-  //   return JSON.parse(jsonPayload) as UserDTO;
-  // }
 }

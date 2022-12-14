@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LayersRepository } from './state';
 import { DTMapService } from './map.service';
+import { getStore } from '@ngneat/elf';
 
 @Injectable({
   providedIn: 'root',
@@ -64,5 +65,11 @@ export class AppService {
       duration: 5000,
       essential: true,
     });
+  }
+
+  logout() {
+    const user = getStore('user');
+    user?.reset();
+    localStorage.removeItem('access_token');
   }
 }
