@@ -31,4 +31,8 @@ export class BackendService {
   signUpUser(token: string, user: UserDTO): Observable<string> {
     return this.http.post<string>('/api/auth/user/signup', { token, user });
   }
+
+  signInUser(token: string): Observable<string> {
+    return this.http.post<string>('/api/auth/user/signin', { token });
+  }
 }

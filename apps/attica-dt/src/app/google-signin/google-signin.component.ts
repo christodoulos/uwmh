@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { GoogleUserInfo, UserDTO } from '@uwmh/data';
 import { UserRepository } from '../state/user';
 import { BackendService } from '../backend.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { SignUpComponent } from '../dialogs/sign-up/sign-up.component';
 import { Subscription } from 'rxjs';
 
@@ -52,26 +52,27 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
   }
 
   continueWithGoogle(token: string) {
-    const { email, name, given_name, family_name, picture, sub } =
-      this.decodeJwtResponse(token);
+    const { email, name, given_name, picture } = this.decodeJwtResponse(token);
 
     this.subscription = this.backend
       .getUserByEmail(email)
       .subscribe((data: UserDTO | null) => {
         if (data) {
-          this.user.updateUser(data);
+          this.backend.signInUser(token).subscribe((jwt) => {
+            console.log(jwt);
+            // Should we decode the backend's jwt here?
+            this.user.updateUser(data);
+          });
         } else {
           const dialogRef = this.dialog.open(SignUpComponent, {
             data: {
               email,
               name,
               given_name,
-              family_name,
               picture,
             },
           });
           dialogRef.afterClosed().subscribe((data: UserDTO) => {
-            console.log('LLLLLLLLLLLLLLLL', data);
             this.backend.signUpUser(token, data).subscribe((jwt) => {
               console.log(jwt);
             });

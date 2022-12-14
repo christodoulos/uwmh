@@ -12,6 +12,26 @@ export class AuthController {
     return this.authService.findUserByEmail(body.email);
   }
 
+  @Post('user/signin')
+  async sign_in_user(@Body() body: { token: string }) {
+    // fix a Google Auth client to verify the token
+    const client = new OAuth2Client();
+    let payload: GoogleAuthPayload;
+    const verify = async () => {
+      const ticket = await client.verifyIdToken({
+        idToken: body.token,
+        audience:
+          '365538312511-d4f1d4n10e7fc03g1jtknou1q4c2t98s.apps.googleusercontent.com',
+      });
+      payload = ticket.getPayload();
+      const { email } = payload;
+      const jwt = await this.authService.signInUser(email);
+      return { jwt };
+    };
+    // proceed to verification
+    return verify().catch(console.error);
+  }
+
   @Post('user/signup')
   async sign_up_user(@Body() body: { token: string; user: UserDTO }) {
     // fix a Google Auth client to verify the token

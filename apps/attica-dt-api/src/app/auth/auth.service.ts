@@ -21,12 +21,8 @@ export class AuthService {
     return jwt;
   }
 
-  async signIn(userDTO: UserDTO) {
-    if (!userDTO) throw new BadRequestException('Unauthenticated');
-
-    const user = await this.findUserByEmail(userDTO.email);
-    // if (!user) return this.registerUser(userDTO);
-
+  async signInUser(email: string) {
+    const user = await this.findUserByEmail(email);
     return this.generateJwt({ ...user });
   }
 
