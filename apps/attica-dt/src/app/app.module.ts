@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { MaterialModule } from '@uwmh/material';
 import { UiModule } from '@uwmh/ui';
 import { DialogModule } from '@uwmh/dialog';
+import { MapboxModule } from '@uwmh/mapbox';
 
 import {
   SourcesRepository,
@@ -22,8 +23,6 @@ import {
 } from '@uwmh/state';
 
 import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
-import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { GoogleSigninComponent } from './google-signin/google-signin.component';
 
 export function initElfDevTools(actions: Actions) {
@@ -36,7 +35,7 @@ export function initElfDevTools(actions: Actions) {
 }
 
 @NgModule({
-  declarations: [AppComponent, MapComponent, GoogleSigninComponent],
+  declarations: [AppComponent, GoogleSigninComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,6 +49,7 @@ export function initElfDevTools(actions: Actions) {
     ]),
     UiModule,
     DialogModule,
+    MapboxModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
@@ -59,9 +59,6 @@ export function initElfDevTools(actions: Actions) {
       },
     }),
     MaterialModule,
-    NgxMapboxGLModule.withConfig({
-      accessToken: environment.mapbox_access_token,
-    }),
   ],
   providers: [
     !environment.production

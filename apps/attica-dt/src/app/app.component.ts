@@ -8,7 +8,7 @@ import { Map } from 'mapbox-gl';
 import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter } from 'rxjs';
 import { AppService } from './app.service';
-import { DTMapService } from './map.service';
+import { DTMapService } from '@uwmh/mapbox';
 import { WelcomeDialogComponent } from '@uwmh/dialog';
 import { UIRepository, UserRepository } from '@uwmh/state';
 

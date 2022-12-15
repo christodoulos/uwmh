@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LayersRepository } from '@uwmh/state';
-import { DTMapService } from './map.service';
+import { DTMapService } from '@uwmh/mapbox';
 import { getStore } from '@ngneat/elf';
 
 @Injectable({
