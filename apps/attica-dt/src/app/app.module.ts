@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 
 import { MaterialModule } from '@uwmh/material';
 import { UiModule } from '@uwmh/ui';
+import { DialogModule } from '@uwmh/dialog';
 
 import {
   SourcesRepository,
@@ -23,12 +24,7 @@ import {
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
-import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
-import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.component';
-import { MapInfoComponent } from './dialogs/map-info/map-info.component';
-import { DrawnGeoJsonComponent } from './dialogs/drawn-geo-json/drawn-geo-json.component';
 import { GoogleSigninComponent } from './google-signin/google-signin.component';
-import { SignUpComponent } from './dialogs/sign-up/sign-up.component';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -40,16 +36,7 @@ export function initElfDevTools(actions: Actions) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MapComponent,
-    WelcomeDialogComponent,
-    LayerToggleComponent,
-    MapInfoComponent,
-    DrawnGeoJsonComponent,
-    GoogleSigninComponent,
-    SignUpComponent,
-  ],
+  declarations: [AppComponent, MapComponent, GoogleSigninComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -62,6 +49,7 @@ export function initElfDevTools(actions: Actions) {
       // },
     ]),
     UiModule,
+    DialogModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter } from 'rxjs';
 import { AppService } from './app.service';
 import { DTMapService } from './map.service';
-import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
+import { WelcomeDialogComponent } from '@uwmh/dialog';
 import { UIRepository, UserRepository } from '@uwmh/state';
 
 @UntilDestroy()

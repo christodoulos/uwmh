@@ -8,11 +8,10 @@ import {
 } from '@angular/core';
 import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
 import { MatDialog } from '@angular/material/dialog';
-import { LayerToggleComponent } from '../dialogs/layer-toggle/layer-toggle.component';
+import { LayerToggleComponent, DrawnGeoJsonComponent } from '@uwmh/dialog';
 import { LayersRepository, DrawnFeaturesRepository } from '@uwmh/state';
 import { DTMapService } from '../map.service';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
-import { DrawnGeoJsonComponent } from '../dialogs/drawn-geo-json/drawn-geo-json.component';
 
 @Component({
   selector: 'uwmh-map',

@@ -11,7 +11,7 @@ import { ThreejsLayer } from './helpers';
 import { mapQuery } from './helpers/map.query0';
 import { debounce } from 'lodash-es';
 import { MatDialog } from '@angular/material/dialog';
-import { MapInfoComponent } from './dialogs/map-info/map-info.component';
+import { MapInfoComponent } from '@uwmh/dialog';
 
 @Injectable({
   providedIn: 'root',

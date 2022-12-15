@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { UserDTO } from '@uwmh/data';
 import { UserRepository, BackendService } from '@uwmh/state';
 import { MatDialog } from '@angular/material/dialog';
-import { SignUpComponent } from '../dialogs/sign-up/sign-up.component';
+import { SignUpComponent } from '@uwmh/dialog';
 import { Subscription } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
