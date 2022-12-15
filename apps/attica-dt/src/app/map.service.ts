@@ -6,7 +6,7 @@ import {
   LayersRepository,
   SourcesRepository,
   MapWhereRepository,
-} from './state';
+} from '@uwmh/state';
 import { ThreejsLayer } from './helpers';
 import { mapQuery } from './helpers/map.query0';
 import { debounce } from 'lodash-es';

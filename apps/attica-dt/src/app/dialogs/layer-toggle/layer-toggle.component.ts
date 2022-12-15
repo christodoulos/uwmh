@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { map, zip } from 'rxjs';
-import { LayersRepository } from '../../state';
+import { zip } from 'rxjs';
+import { LayersRepository } from '@uwmh/state';
 
 @Component({
   selector: 'uwmh-layer-toggle',

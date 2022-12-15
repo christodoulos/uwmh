@@ -4,8 +4,7 @@ import { AfterViewInit, Component, NgZone, OnDestroy } from '@angular/core';
 import { accounts } from 'google-one-tap';
 import { environment } from '../../environments/environment';
 import { UserDTO } from '@uwmh/data';
-import { UserRepository } from '../state/user';
-import { BackendService } from '../backend.service';
+import { UserRepository, BackendService } from '@uwmh/state';
 import { MatDialog } from '@angular/material/dialog';
 import { SignUpComponent } from '../dialogs/sign-up/sign-up.component';
 import { Subscription } from 'rxjs';
@@ -47,7 +46,7 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
     gAccounts.id.renderButton(
       document.getElementById('google-button') as HTMLElement,
       {
-        type: 'icon',
+        text: 'signin',
         size: 'medium',
       }
     );
@@ -62,7 +61,6 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
       .subscribe((data: UserDTO | null) => {
         if (data) {
           this.backend.signInUser(token).subscribe((d) => {
-            console.log(this.jwtHelper.decodeToken(d.jwt));
             // Should we decode the backend's jwt here?
             this.user.updateUser(this.jwtHelper.decodeToken(d.jwt)['_doc']);
             localStorage.setItem('access_token', d.jwt);

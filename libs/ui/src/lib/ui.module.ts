@@ -10,6 +10,7 @@ import { PlantNurseryPlcComponent } from './plant-nursery-plc/plant-nursery-plc.
 import { PNWeatherRepository } from './state/pnweather';
 import { PNPLCEntities } from './state/pnplc';
 import { LinePlotComponent } from './line-plot/line-plot.component';
+import { AvatarMenuComponent } from './avatar-menu/avatar-menu.component';
 
 @NgModule({
   imports: [
@@ -23,11 +24,13 @@ import { LinePlotComponent } from './line-plot/line-plot.component';
     WeatherbitInfoComponent,
     PlantNurseryPlcComponent,
     LinePlotComponent,
+    AvatarMenuComponent,
   ],
   exports: [
     WeatherbitInfoComponent,
     PlantNurseryPlcComponent,
     LinePlotComponent,
+    AvatarMenuComponent,
   ],
   providers: [PNWeatherRepository, PNPLCEntities],
 })

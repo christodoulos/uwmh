@@ -1,0 +1,21 @@
+<div class="flex items-center">
+  <button
+    mat-icon-button
+    [matTooltip]="(username$ | async) ?? ''"
+    [matTooltipPosition]="'after'"
+    [matTooltipClass]="'text-sm'"
+    [matMenuTriggerFor]="menu"
+  >
+    <img class="circle" src="{{ userPicture$ | async }}" />
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="onClick('logout')">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</div>

@@ -10,8 +10,7 @@ import { delay, filter } from 'rxjs';
 import { AppService } from './app.service';
 import { DTMapService } from './map.service';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
-import { UIRepository } from './state';
-import { UserRepository } from './state/user';
+import { UIRepository, UserRepository } from '@uwmh/state';
 
 @UntilDestroy()
 @Component({
@@ -87,7 +86,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.service.portara();
   }
 
-  logout() {
-    this.service.logout();
+  onUserSelection(selection: string) {
+    switch (selection) {
+      case 'logout':
+        this.service.logout();
+        break;
+
+      default:
+        break;
+    }
   }
 }

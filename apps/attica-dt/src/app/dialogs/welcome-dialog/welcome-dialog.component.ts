@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UIRepository } from '../../state';
+import { UIRepository } from '@uwmh/state';
 
 @Component({
   selector: 'uwmh-welcome-dialog',

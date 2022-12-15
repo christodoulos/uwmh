@@ -6,18 +6,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  LngLatBoundsLike,
-  LngLatLike,
-  Map,
-  MapboxGeoJSONFeature,
-} from 'mapbox-gl';
+import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
 import { MatDialog } from '@angular/material/dialog';
 import { LayerToggleComponent } from '../dialogs/layer-toggle/layer-toggle.component';
-import { LayersRepository } from '../state';
+import { LayersRepository, DrawnFeaturesRepository } from '@uwmh/state';
 import { DTMapService } from '../map.service';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
-import { DrawnFeaturesRepository } from '../state/draw';
 import { DrawnGeoJsonComponent } from '../dialogs/drawn-geo-json/drawn-geo-json.component';
 
 @Component({

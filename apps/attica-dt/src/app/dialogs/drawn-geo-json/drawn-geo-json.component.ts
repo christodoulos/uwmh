@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DrawnFeaturesRepository } from '../../state/draw';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DrawnFeaturesRepository } from '@uwmh/state';
 
 @Component({
   selector: 'uwmh-drawn-geo-json',
@@ -7,9 +7,7 @@ import { DrawnFeaturesRepository } from '../../state/draw';
   styleUrls: ['./drawn-geo-json.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawnGeoJsonComponent implements OnInit {
+export class DrawnGeoJsonComponent {
   features$ = this.drawn.features$;
   constructor(private drawn: DrawnFeaturesRepository) {}
-
-  ngOnInit(): void {}
 }

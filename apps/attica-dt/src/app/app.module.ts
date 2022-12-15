@@ -9,15 +9,16 @@ import { Actions } from '@ngneat/effects-ng';
 import { devTools } from '@ngneat/elf-devtools';
 import { environment } from '../environments/environment';
 
-import {
-  LayersRepository,
-  MapWhereRepository,
-  SourcesRepository,
-  UIRepository,
-} from './state';
-
 import { MaterialModule } from '@uwmh/material';
 import { UiModule } from '@uwmh/ui';
+
+import {
+  SourcesRepository,
+  LayersRepository,
+  MapWhereRepository,
+  UIRepository,
+  UserRepository,
+} from '@uwmh/state';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -25,10 +26,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { WelcomeDialogComponent } from './dialogs/welcome-dialog/welcome-dialog.component';
 import { LayerToggleComponent } from './dialogs/layer-toggle/layer-toggle.component';
 import { MapInfoComponent } from './dialogs/map-info/map-info.component';
-import { DrawnFeaturesRepository } from './state/draw';
 import { DrawnGeoJsonComponent } from './dialogs/drawn-geo-json/drawn-geo-json.component';
 import { GoogleSigninComponent } from './google-signin/google-signin.component';
-import { UserRepository } from './state/user';
 import { SignUpComponent } from './dialogs/sign-up/sign-up.component';
 
 export function initElfDevTools(actions: Actions) {
@@ -87,9 +86,8 @@ export function initElfDevTools(actions: Actions) {
       : [],
     SourcesRepository,
     LayersRepository,
-    UIRepository,
     MapWhereRepository,
-    DrawnFeaturesRepository,
+    UIRepository,
     UserRepository,
   ],
   bootstrap: [AppComponent],
