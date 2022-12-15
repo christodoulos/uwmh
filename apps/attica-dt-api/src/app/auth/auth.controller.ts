@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { OAuth2Client } from 'google-auth-library';
-import { GoogleAuthPayload, UserDTO } from '@uwmh/data';
+import { GoogleAuthPayload, UserDTO } from '@uwmh/state';
 
 @Controller('auth')
 export class AuthController {

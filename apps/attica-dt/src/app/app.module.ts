@@ -20,6 +20,8 @@ import {
   MapWhereRepository,
   UIRepository,
   UserRepository,
+  PNWeatherRepository,
+  PNPLCEntities,
 } from '@uwmh/state';
 
 import { AppComponent } from './app.component';
@@ -74,6 +76,8 @@ export function initElfDevTools(actions: Actions) {
     MapWhereRepository,
     UIRepository,
     UserRepository,
+    PNWeatherRepository,
+    PNPLCEntities,
   ],
   bootstrap: [AppComponent],
 })

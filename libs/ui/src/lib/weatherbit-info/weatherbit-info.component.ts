@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { map, timer } from 'rxjs';
-import { PNWeatherRepository } from '../state/pnweather';
+import { PNWeatherRepository } from '@uwmh/state';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()

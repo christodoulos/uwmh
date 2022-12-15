@@ -7,8 +7,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { WeatherbitInfoComponent } from './weatherbit-info/weatherbit-info.component';
 import { PlantNurseryPlcComponent } from './plant-nursery-plc/plant-nursery-plc.component';
 
-import { PNWeatherRepository } from './state/pnweather';
-import { PNPLCEntities } from './state/pnplc';
+// import { PNWeatherRepository } from './state/pnweather';
+// import { PNPLCEntities } from './state/pnplc';
 import { LinePlotComponent } from './line-plot/line-plot.component';
 import { AvatarMenuComponent } from './avatar-menu/avatar-menu.component';
 
@@ -32,6 +32,6 @@ import { AvatarMenuComponent } from './avatar-menu/avatar-menu.component';
     LinePlotComponent,
     AvatarMenuComponent,
   ],
-  providers: [PNWeatherRepository, PNPLCEntities],
+  // providers: [PNWeatherRepository, PNPLCEntities],
 })
 export class UiModule {}

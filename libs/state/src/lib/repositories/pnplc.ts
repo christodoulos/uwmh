@@ -5,9 +5,9 @@ import {
   setEntities,
   selectAllEntities,
 } from '@ngneat/elf-entities';
-import { PNPLC } from '@uwmh/data';
+import { PNPLC } from '../interfaces';
 import { map } from 'rxjs';
-import { UiBackendService } from './backend.service';
+import { BackendService } from './backend.service';
 
 const store = createStore({ name: 'pnplc' }, withEntities<PNPLC>());
 
@@ -34,7 +34,7 @@ export class PNPLCEntities {
     selectAllEntities(),
     map((e) => e.map((item) => item.ts))
   );
-  constructor(private backend: UiBackendService) {
+  constructor(private backend: BackendService) {
     this.backend.getPNPLCEntities().subscribe((values) => {
       store.update(setEntities(values));
     });

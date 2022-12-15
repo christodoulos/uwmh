@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GeoJSONMapSource, Layer } from '@uwmh/data';
 import { AnyLayer, LngLatLike, Map, Popup } from 'mapbox-gl';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   LayersRepository,
   SourcesRepository,
   MapWhereRepository,
+  GeoJSONMapSource,
+  Layer,
 } from '@uwmh/state';
 import { ThreejsLayer } from './helpers';
 import { mapQuery } from './helpers/map.query0';

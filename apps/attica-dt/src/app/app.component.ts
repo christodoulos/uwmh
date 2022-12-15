@@ -22,8 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('left') sidenav!: MatSidenav;
 
   isLoggedIn$ = this.user.isLoggedIn$;
-  username$ = this.user.name$;
-  userPicture$ = this.user.picture$;
+
   constructor(
     private mapService: DTMapService,
     private service: AppService,

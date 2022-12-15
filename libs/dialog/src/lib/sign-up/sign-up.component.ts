@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserDTO } from '@uwmh/data';
+import { UserDTO } from '@uwmh/state';
 
 @Component({
   selector: 'uwmh-sign-up',

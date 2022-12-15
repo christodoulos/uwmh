@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
-import { GoogleUserInfo, DTUser, UserDTO } from '@uwmh/data';
+import { UserDTO } from '../interfaces';
 
 const user = createStore(
   { name: 'user' },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PNPLCEntities } from '@uwmh/ui';
+import { PNPLCEntities } from '@uwmh/state';
 
 @Component({
   selector: 'uwmh-map-info',

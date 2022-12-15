@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
-import { MapWhere, MapWhereInit } from '@uwmh/data';
+import { MapWhere, MapWhereInit } from '../interfaces';
 
 const mapwhere = createStore(
   { name: 'mapwhere' },

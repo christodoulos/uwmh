@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
 import { lastValueFrom, map, mergeMap, tap } from 'rxjs';
 import { BackendService } from './backend.service';
-import { MapSources, sourcesInit } from '@uwmh/data';
+import { MapSources, sourcesInit } from '../interfaces';
 
 const atticaSources = createStore(
   { name: 'sources' },

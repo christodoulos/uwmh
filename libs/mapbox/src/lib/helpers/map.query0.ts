@@ -1,5 +1,5 @@
 import { MapMouseEvent, EventData, Map } from 'mapbox-gl';
-import { MapWhere } from '@uwmh/data';
+import { MapWhere } from '@uwmh/state';
 
 export function mapQuery(e: MapMouseEvent & EventData, map: Map): MapWhere {
   const point = { x: e.point.x, y: e.point.y };

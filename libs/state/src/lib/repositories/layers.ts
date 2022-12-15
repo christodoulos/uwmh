@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createStore, withProps, select } from '@ngneat/elf';
-import { MapLayers, LayersInit } from '@uwmh/data';
+import { MapLayers, LayersInit } from '../interfaces';
 import { BehaviorSubject, map, Observable, of as ObservableOf } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 

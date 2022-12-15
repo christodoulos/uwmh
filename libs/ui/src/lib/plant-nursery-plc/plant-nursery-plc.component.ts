@@ -10,8 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
-import { PNPLCEntities } from '../state/pnplc';
-import { PNPLC } from '@uwmh/data';
+import { PNPLC, PNPLCEntities } from '@uwmh/state';
 
 import * as XLSX from 'xlsx';
 
