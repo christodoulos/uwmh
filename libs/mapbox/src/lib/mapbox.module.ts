@@ -8,6 +8,11 @@ import { MaterialModule } from '@uwmh/material';
 import { MapComponent } from './map/map.component';
 
 import { env } from './env';
+import {
+  SourcesRepository,
+  LayersRepository,
+  MapWhereRepository,
+} from '@uwmh/state';
 
 @NgModule({
   imports: [
@@ -20,5 +25,6 @@ import { env } from './env';
   ],
   declarations: [MapComponent],
   exports: [MapComponent],
+  providers: [SourcesRepository, LayersRepository, MapWhereRepository],
 })
 export class MapboxModule {}

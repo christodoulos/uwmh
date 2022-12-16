@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@uwmh/material';
-// import { UiModule } from '@uwmh/ui';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { WelcomeDialogComponent } from './welcome-dialog/welcome-dialog.component';
@@ -16,14 +15,7 @@ import { PlantNurseryPlcComponent } from './plant-nursery-plc/plant-nursery-plc.
 import { LinePlotComponent } from './line-plot/line-plot.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MaterialModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'),
-    }),
-  ],
+  imports: [CommonModule, FormsModule, MaterialModule, NgxEchartsModule],
   declarations: [
     WelcomeDialogComponent,
     LayerToggleComponent,

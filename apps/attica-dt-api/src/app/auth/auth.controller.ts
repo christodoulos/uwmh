@@ -14,23 +14,18 @@ export class AuthController {
 
   @Post('user/signin')
   async sign_in_user(@Body() body: { token: string }) {
-    console.log(body);
     // fix a Google Auth client to verify the token
     const client = new OAuth2Client();
     let payload: GoogleAuthPayload;
-    console.log(1);
     const verify = async () => {
-      console.log(2);
       const ticket = await client.verifyIdToken({
         idToken: body.token,
         audience:
           '365538312511-d4f1d4n10e7fc03g1jtknou1q4c2t98s.apps.googleusercontent.com',
       });
-      console.log(3);
       payload = ticket.getPayload();
       const { email } = payload;
       const jwt = await this.authService.signInUser(email);
-      console.log(4);
       return { jwt };
     };
     // proceed to verification
@@ -39,7 +34,6 @@ export class AuthController {
 
   @Post('user/signup')
   async sign_up_user(@Body() body: { token: string; user: UserDTO }) {
-    console.log(body);
     // fix a Google Auth client to verify the token
     const client = new OAuth2Client();
     let payload: GoogleAuthPayload;
