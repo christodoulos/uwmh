@@ -4,10 +4,9 @@ import { AfterViewInit, Component, NgZone, OnDestroy } from '@angular/core';
 import { accounts } from 'google-one-tap';
 import { env } from './env';
 import { UserRepository, BackendService, UserDTO } from '@uwmh/state';
-import { MatDialog } from '@angular/material/dialog';
-import { SignUpComponent } from '@uwmh/dialog';
 import { Subscription } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { DTDialogService } from '@uwmh/dialog';
 
 @Component({
   selector: 'uwmh-google-signin',
@@ -20,7 +19,7 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
     private ngZone: NgZone,
     private user: UserRepository,
     private backend: BackendService,
-    private dialog: MatDialog,
+    private dialog: DTDialogService,
     private jwtHelper: JwtHelperService
   ) {}
 
@@ -57,7 +56,7 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
 
     this.subscription = this.backend
       .getUserByEmail(email)
-      .subscribe((data: UserDTO | null) => {
+      .subscribe(async (data: UserDTO | null) => {
         if (data) {
           this.backend.signInUser(token).subscribe((d) => {
             // Should we decode the backend's jwt here?
@@ -65,7 +64,7 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
             localStorage.setItem('access_token', d.jwt);
           });
         } else {
-          const dialogRef = this.dialog.open(SignUpComponent, {
+          const dialogRef = await this.dialog.openDialog('sign-up', {
             data: {
               email,
               name,

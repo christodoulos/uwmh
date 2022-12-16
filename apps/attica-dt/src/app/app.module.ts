@@ -13,7 +13,6 @@ import { MaterialModule } from '@uwmh/material';
 import { UiModule } from '@uwmh/ui';
 import { DialogModule } from '@uwmh/dialog';
 import { MapboxModule } from '@uwmh/mapbox';
-import { GoogleModule } from '@uwmh/google';
 
 import {
   SourcesRepository,
@@ -52,7 +51,6 @@ export function initElfDevTools(actions: Actions) {
     UiModule,
     DialogModule,
     MapboxModule,
-    GoogleModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

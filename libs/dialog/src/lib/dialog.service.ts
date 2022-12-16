@@ -6,9 +6,13 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export class DTDialogService {
   constructor(private dialog: MatDialog) {}
 
-  async openDialog(dialogName: string): Promise<MatDialogRef<any>> {
+  async openDialog(
+    dialogName: string,
+    data: any = undefined
+  ): Promise<MatDialogRef<any>> {
     const chunc = await import(`./${dialogName}/${dialogName}.component`);
     const dialogComponent = Object.values(chunc)[0] as ComponentType<unknown>;
-    return this.dialog.open(dialogComponent);
+    if (data) return this.dialog.open(dialogComponent, data);
+    else return this.dialog.open(dialogComponent);
   }
 }

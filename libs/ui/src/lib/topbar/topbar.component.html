@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div class="w-full flex flex-row justify-between">
+      <img class="w-36" src="/assets/logo1.png" />
+      <!-- <button
+          mat-icon-button
+          *ngIf="sidenav.mode === 'over'"
+          (click)="sidenav.toggle()"
+        >
+          <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+          <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+        </button> -->
+      <span>Attica Digital Twin</span>
+
+      <uwmh-google-signin
+        *ngIf="(isLoggedIn$ | async) === false"
+      ></uwmh-google-signin>
+
+      <uwmh-avatar-menu
+        *ngIf="isLoggedIn$ | async"
+        (menuSelection)="onUserSelection($event)"
+      ></uwmh-avatar-menu>
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <uwmh-quick-navigation></uwmh-quick-navigation
+  ></mat-toolbar-row>
+</mat-toolbar>
