@@ -8,7 +8,13 @@
 </button>
 
 <mat-menu #quicknavs="matMenu">
-  <button mat-menu-item>Attica Region</button>
-  <button mat-menu-item>Rivers of Attica</button>
-  <button mat-menu-item>Athens Plant Nursery</button>
+  <button mat-menu-item (click)="onClick('attica-region')">
+    Attica Region
+  </button>
+  <button mat-menu-item (click)="onClick('attica-rivers')">
+    Rivers of Attica
+  </button>
+  <button mat-menu-item (click)="onClick('plant-nursery')">
+    Athens Plant Nursery
+  </button>
 </mat-menu>

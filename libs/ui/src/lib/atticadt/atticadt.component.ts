@@ -4,6 +4,7 @@ import { Map } from 'mapbox-gl';
 import { DTMapService } from '@uwmh/mapbox';
 import { UIRepository } from '@uwmh/state';
 import { DTDialogService } from '@uwmh/dialog';
+import { UIService } from '../ui.service';
 
 @Component({
   selector: 'uwmh-atticadt',
@@ -15,7 +16,8 @@ export class AtticadtComponent implements OnInit {
   constructor(
     private mapService: DTMapService,
     private ui: UIRepository,
-    private dialog: DTDialogService
+    private dialog: DTDialogService,
+    private service: UIService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +35,15 @@ export class AtticadtComponent implements OnInit {
       case 'logout':
         this.logout();
         break;
-
+      case 'attica-region':
+        this.service.boundary_zoom();
+        break;
+      case 'attica-rivers':
+        this.service.rivers();
+        break;
+      case 'plant-nursery':
+        this.service.nursery();
+        break;
       default:
         break;
     }

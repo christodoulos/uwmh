@@ -1,22 +1,7 @@
-<uwmh-topbar (topbarSelection)="onUserSelection($event)"></uwmh-topbar>
+<uwmh-topbar
+  (topbarSelection)="onUserSelection($event)"
+  (quickSelection)="onUserSelection($event)"
+></uwmh-topbar>
 <div class="content">
   <uwmh-map (mapEvent)="onMapEvent($event)"></uwmh-map>
 </div>
-
-<!-- <mat-sidenav-container>
-  <mat-sidenav #left #sidenav="matSidenav" class="content" position="start">
-    <mat-nav-list>
-      <h4 matSubheader>Quick Navigation</h4>
-
-      <a mat-list-item (click)="attica_bounds()">Attica Region</a>
-      <a mat-list-item (click)="rivers()">Rivers of Attica</a>
-      <a mat-list-item (click)="nursery()">Athens Plant Nursery</a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="content">
-      <uwmh-map (mapEvent)="onMapEvent($event)"></uwmh-map>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->

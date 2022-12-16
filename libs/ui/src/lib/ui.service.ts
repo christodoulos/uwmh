@@ -6,7 +6,7 @@ import { getStore } from '@ngneat/elf';
 @Injectable({
   providedIn: 'root',
 })
-export class AppService {
+export class UIService {
   map = this.mapService.mapSubject;
   constructor(
     private mapService: DTMapService,

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'uwmh-quick-navigation',
@@ -6,8 +11,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./quick-navigation.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuickNavigationComponent implements OnInit {
-  constructor() {}
+export class QuickNavigationComponent {
+  @Output() quickSelection = new EventEmitter<string>();
 
-  ngOnInit(): void {}
+  onClick(selection: string) {
+    this.quickSelection.emit(selection);
+  }
 }

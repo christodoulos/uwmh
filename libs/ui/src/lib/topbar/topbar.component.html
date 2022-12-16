@@ -2,14 +2,7 @@
   <mat-toolbar-row>
     <div class="w-full flex flex-row justify-between">
       <img class="w-36" src="/assets/logo1.png" />
-      <!-- <button
-          mat-icon-button
-          *ngIf="sidenav.mode === 'over'"
-          (click)="sidenav.toggle()"
-        >
-          <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-          <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-        </button> -->
+
       <span>Attica Digital Twin</span>
 
       <uwmh-google-signin
@@ -24,6 +17,8 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row>
-    <uwmh-quick-navigation></uwmh-quick-navigation
+    <uwmh-quick-navigation
+      (quickSelection)="onQuickSelection($event)"
+    ></uwmh-quick-navigation
   ></mat-toolbar-row>
 </mat-toolbar>
