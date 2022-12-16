@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { delay, filter } from 'rxjs';
 import { AppService } from './app.service';
 import { DTMapService } from '@uwmh/mapbox';
-import { WelcomeDialogComponent } from '@uwmh/dialog';
+import { DTDialogService, WelcomeDialogComponent } from '@uwmh/dialog';
 import { UIRepository, UserRepository } from '@uwmh/state';
 
 @UntilDestroy()
@@ -28,14 +28,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     private service: AppService,
     private observer: BreakpointObserver,
     private router: Router,
-    private dialog: MatDialog,
+    // private dialog: MatDialog,
+    private dialog: DTDialogService,
     private ui: UIRepository,
     private user: UserRepository
   ) {}
 
   ngOnInit() {
     this.ui.setIsLoading(true);
-    this.dialog.open(WelcomeDialogComponent);
+    // this.dialog.open(WelcomeDialogComponent);
+    this.dialog.openDialog('welcome-dialog');
   }
 
   ngAfterViewInit() {

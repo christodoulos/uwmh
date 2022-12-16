@@ -8,7 +8,11 @@ import {
 } from '@angular/core';
 import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
 import { MatDialog } from '@angular/material/dialog';
-import { LayerToggleComponent, DrawnGeoJsonComponent } from '@uwmh/dialog';
+import {
+  LayerToggleComponent,
+  DrawnGeoJsonComponent,
+  DTDialogService,
+} from '@uwmh/dialog';
 import { LayersRepository, DrawnFeaturesRepository } from '@uwmh/state';
 import { DTMapService } from '../map.service';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
@@ -27,7 +31,8 @@ export class MapComponent implements OnInit {
   mapSubject$ = this.mapService.mapSubject;
   constructor(
     private mapService: DTMapService,
-    private dialog: MatDialog,
+    // private dialog: MatDialog,
+    private dialog: DTDialogService,
     private layers: LayersRepository,
     private drawn: DrawnFeaturesRepository
   ) {}
@@ -101,11 +106,13 @@ export class MapComponent implements OnInit {
   }
 
   toggleLayers() {
-    this.dialog.open(LayerToggleComponent);
+    // this.dialog.open(LayerToggleComponent);
+    this.dialog.openDialog('layer-toggle');
   }
 
   drawnfeatures() {
-    this.dialog.open(DrawnGeoJsonComponent);
+    // this.dialog.open(DrawnGeoJsonComponent);
+    this.dialog.openDialog('drawn-geo-json');
   }
 
   streets() {

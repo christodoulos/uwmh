@@ -1,0 +1,14 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="quicknavs"
+  matTooltip="Quick Navigation"
+  matTooltipClass="text-sm"
+>
+  <mat-icon>moving</mat-icon>
+</button>
+
+<mat-menu #quicknavs="matMenu">
+  <button mat-menu-item>Attica Region</button>
+  <button mat-menu-item>Rivers of Attica</button>
+  <button mat-menu-item>Athens Plant Nursery</button>
+</mat-menu>
