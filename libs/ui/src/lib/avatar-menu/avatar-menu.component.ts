@@ -21,4 +21,8 @@ export class AvatarMenuComponent {
   onClick(selection: string) {
     this.menuSelection.emit(selection);
   }
+
+  notimplemented() {
+    alert('Not Implemented Yet!');
+  }
 }
