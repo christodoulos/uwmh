@@ -2,7 +2,7 @@ declare let google: any;
 
 import { AfterViewInit, Component, NgZone, OnDestroy } from '@angular/core';
 import { accounts } from 'google-one-tap';
-import { environment } from '../../environments/environment';
+import { env } from './env';
 import { UserRepository, BackendService, UserDTO } from '@uwmh/state';
 import { MatDialog } from '@angular/material/dialog';
 import { SignUpComponent } from '@uwmh/dialog';
@@ -32,7 +32,7 @@ export class GoogleSigninComponent implements AfterViewInit, OnDestroy {
     const gAccounts: accounts = google.accounts;
 
     gAccounts.id.initialize({
-      client_id: environment.google_client_id,
+      client_id: env.google_client_id,
       ux_mode: 'popup',
       cancel_on_tap_outside: true,
       callback: ({ credential }) => {

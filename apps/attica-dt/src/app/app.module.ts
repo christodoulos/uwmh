@@ -13,6 +13,7 @@ import { MaterialModule } from '@uwmh/material';
 import { UiModule } from '@uwmh/ui';
 import { DialogModule } from '@uwmh/dialog';
 import { MapboxModule } from '@uwmh/mapbox';
+import { GoogleModule } from '@uwmh/google';
 
 import {
   SourcesRepository,
@@ -25,7 +26,6 @@ import {
 } from '@uwmh/state';
 
 import { AppComponent } from './app.component';
-import { GoogleSigninComponent } from './google-signin/google-signin.component';
 
 export function initElfDevTools(actions: Actions) {
   return () => {
@@ -37,7 +37,7 @@ export function initElfDevTools(actions: Actions) {
 }
 
 @NgModule({
-  declarations: [AppComponent, GoogleSigninComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -52,6 +52,7 @@ export function initElfDevTools(actions: Actions) {
     UiModule,
     DialogModule,
     MapboxModule,
+    GoogleModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

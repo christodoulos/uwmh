@@ -17,6 +17,7 @@
     "paths": {
       "@uwmh/data": ["libs/data/src/index.ts"],
       "@uwmh/dialog": ["libs/dialog/src/index.ts"],
+      "@uwmh/google": ["libs/google/src/index.ts"],
       "@uwmh/mapbox": ["libs/mapbox/src/index.ts"],
       "@uwmh/material": ["libs/material/src/index.ts"],
       "@uwmh/state": ["libs/state/src/index.ts"],
