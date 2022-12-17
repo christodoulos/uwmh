@@ -5,7 +5,11 @@
     [matTooltipClass]="'text-sm'"
     [matMenuTriggerFor]="menu"
   >
-    <img class="circle" src="{{ userPicture$ | async }}" />
+    <img
+      class="circle"
+      src="{{ userPicture$ | async }}"
+      referrerpolicy="no-referrer"
+    />
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="notimplemented()">
