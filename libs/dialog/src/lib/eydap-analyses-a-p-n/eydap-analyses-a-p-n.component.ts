@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { EYDAP_APN, EYDAP_APN_ANALYSES_Entities } from '@uwmh/state';
 
 @Component({
@@ -7,9 +7,13 @@ import { EYDAP_APN, EYDAP_APN_ANALYSES_Entities } from '@uwmh/state';
   styleUrls: ['./eydap-analyses-a-p-n.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EydapAnalysesAPNDialogComponent {
+export class EydapAnalysesAPNDialogComponent implements OnInit {
   today = new Date();
   constructor(private analyses: EYDAP_APN_ANALYSES_Entities) {}
+
+  ngOnInit(): void {
+    console.log();
+  }
 
   onAnalysis(analysis: EYDAP_APN) {
     console.log(analysis);

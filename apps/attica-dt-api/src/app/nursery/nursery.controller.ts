@@ -28,8 +28,14 @@ export class NurseryController {
     return await this.service.plc_get_latest();
   }
 
+  @Get('eydap')
+  async eydap_apn_get_all_analyses() {
+    return await this.service.eydap_apn_analyses();
+  }
+
   @Post('eydap')
-  async eydap_apn_analysis_write(@Body() body: EYDAP_APN_DTO) {
-    return await this.service.eydap_apn_analysis_write(body);
+  async eydap_apn_analysis_write(@Body() body: { data: EYDAP_APN_DTO }) {
+    console.log(body);
+    return await this.service.eydap_apn_analysis_write(body.data);
   }
 }

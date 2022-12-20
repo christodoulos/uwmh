@@ -16,9 +16,19 @@ const store = createStore(
 
 @Injectable({ providedIn: 'root' })
 export class EYDAP_APN_ANALYSES_Entities {
+  allEntities$ = store.pipe(selectAllEntities());
   constructor(private backend: BackendService) {}
 
-  addAnalysis(analysis: EYDAP_APN) {
-    store.update(addEntities(analysis));
+  async getAnalyses() {
+    this.backend.getEYDAPAPNAnalyses().subscribe((values) => {
+      console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOO', values);
+      store.update(addEntities(values));
+    });
+  }
+
+  async addAnalysis(analysis: EYDAP_APN) {
+    this.backend.writeEYDAPAnalysis(analysis).subscribe((value) => {
+      store.update(addEntities(value));
+    });
   }
 }

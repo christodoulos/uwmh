@@ -5,6 +5,7 @@ export type EYDAP_APN_Document = HydratedDocument<typeof EYDAP_APN_Schema>;
 export type EYDAP_APN = typeof EYDAP_APN_Schema;
 export const EYDAP_APN_Schema = new mongoose.Schema(
   {
+    id: { type: 'Number', required: true },
     timestamp: { type: 'Date', required: true },
     total_suspended_solids: { type: 'Number', required: true },
     biochemical_oxygen_demand: { type: 'Number', required: true },

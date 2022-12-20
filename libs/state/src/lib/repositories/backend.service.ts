@@ -59,6 +59,11 @@ export class BackendService {
   }
 
   writeEYDAPAnalysis(analysis: EYDAP_APN) {
-    return this.http.post<EYDAP_APN>('/api/nursery/eydap', analysis);
+    console.log('BBBBBBBBBBBBBBBBBBB', analysis);
+    return this.http.post<EYDAP_APN>('/api/nursery/eydap', { data: analysis });
+  }
+
+  getEYDAPAPNAnalyses() {
+    return this.http.get<EYDAP_APN[]>('/api/nursery/eydap');
   }
 }

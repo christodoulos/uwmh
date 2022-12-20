@@ -1,0 +1,26 @@
+<table class="text-xs" mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let entity">
+      {{ entity.timestamp | date: 'short' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="turbidity">
+    <th mat-header-cell *matHeaderCellDef>Turbidity</th>
+    <td mat-cell *matCellDef="let entity">
+      {{ entity.turbidity }}
+    </td>
+  </ng-container>
+
+  <tr
+    mat-header-row
+    *matHeaderRowDef="displayedColumns"
+    class="text-center text-xs"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    class="text-center text-xs"
+  ></tr>
+</table>

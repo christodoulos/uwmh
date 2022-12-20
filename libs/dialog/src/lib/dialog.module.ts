@@ -12,9 +12,10 @@ import { MapInfoComponent } from './map-info/map-info.component';
 import { DrawnGeoJsonComponent } from './drawn-geo-json/drawn-geo-json.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { WeatherbitInfoComponent } from './weatherbit-info/weatherbit-info.component';
-import { PlantNurseryPlcComponent } from './plant-nursery-plc/plant-nursery-plc.component';
+import { PlantNurseryPlcComponent } from './datatables/plant-nursery-plc/plant-nursery-plc.component';
 import { LinePlotComponent } from './line-plot/line-plot.component';
 import { EydapAnalysesAPNDialogComponent } from './eydap-analyses-a-p-n/eydap-analyses-a-p-n.component';
+import { EydapApnComponent } from './datatables/eydap-apn/eydap-apn.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { EydapAnalysesAPNDialogComponent } from './eydap-analyses-a-p-n/eydap-an
     PlantNurseryPlcComponent,
     LinePlotComponent,
     EydapAnalysesAPNDialogComponent,
+    EydapApnComponent,
   ],
   exports: [
     WelcomeDialogComponent,
