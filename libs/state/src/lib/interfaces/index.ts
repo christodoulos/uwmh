@@ -8,3 +8,4 @@ export * from './pnplc';
 export * from './pnweather';
 export * from './source';
 export * from './user';
+export * from './eydap-apn';

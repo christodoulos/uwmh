@@ -1,6 +1,30 @@
 import * as mongoose from 'mongoose';
 import { HydratedDocument } from 'mongoose';
 
+export type EYDAP_APN_Document = HydratedDocument<typeof EYDAP_APN_Schema>;
+export type EYDAP_APN = typeof EYDAP_APN_Schema;
+export const EYDAP_APN_Schema = new mongoose.Schema(
+  {
+    timestamp: { type: 'Date', required: true },
+    total_suspended_solids: { type: 'Number', required: true },
+    biochemical_oxygen_demand: { type: 'Number', required: true },
+    total_nitrogen: { type: 'Number', required: true },
+    ammonium: { type: 'Number', required: true },
+    turbidity: { type: 'Number', required: true },
+    total_carbon: { type: 'Number', required: true },
+    electric_conductivity: { type: 'Number', required: true },
+  },
+  {
+    collection: 'eydap-apn',
+    // toJSON: {
+    //   transform: function (_doc, ret) {
+    //     ret.id = ret._id;
+    //     delete ret._id;
+    //   },
+    // },
+  }
+);
+
 export type PLCDocument = HydratedDocument<typeof PLCSchema>;
 
 export type PLC = typeof PLCSchema;

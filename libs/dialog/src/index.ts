@@ -6,3 +6,5 @@ export * from './lib/layer-toggle/layer-toggle.component';
 export * from './lib/map-info/map-info.component';
 export * from './lib/sign-up/sign-up.component';
 export * from './lib/welcome-dialog/welcome-dialog.component';
+
+export * from './lib/eydap-analyses-a-p-n/eydap-analyses-a-p-n.component';

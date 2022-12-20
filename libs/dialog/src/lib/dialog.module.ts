@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@uwmh/material';
+import { UiformsModule } from '@uwmh/uiforms';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { WelcomeDialogComponent } from './welcome-dialog/welcome-dialog.component';
@@ -13,9 +14,16 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { WeatherbitInfoComponent } from './weatherbit-info/weatherbit-info.component';
 import { PlantNurseryPlcComponent } from './plant-nursery-plc/plant-nursery-plc.component';
 import { LinePlotComponent } from './line-plot/line-plot.component';
+import { EydapAnalysesAPNDialogComponent } from './eydap-analyses-a-p-n/eydap-analyses-a-p-n.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, MaterialModule, NgxEchartsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MaterialModule,
+    UiformsModule,
+    NgxEchartsModule,
+  ],
   declarations: [
     WelcomeDialogComponent,
     LayerToggleComponent,
@@ -25,6 +33,7 @@ import { LinePlotComponent } from './line-plot/line-plot.component';
     WeatherbitInfoComponent,
     PlantNurseryPlcComponent,
     LinePlotComponent,
+    EydapAnalysesAPNDialogComponent,
   ],
   exports: [
     WelcomeDialogComponent,
@@ -33,6 +42,7 @@ import { LinePlotComponent } from './line-plot/line-plot.component';
     DrawnGeoJsonComponent,
     SignUpComponent,
     LinePlotComponent,
+    EydapAnalysesAPNDialogComponent,
   ],
 })
 export class DialogModule {}

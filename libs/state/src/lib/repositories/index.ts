@@ -8,3 +8,4 @@ export * from './ui';
 export * from './user';
 export * from './pnplc';
 export * from './pnweather';
+export * from './eydap-apn';

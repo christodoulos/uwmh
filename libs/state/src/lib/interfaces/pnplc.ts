@@ -1,5 +1,5 @@
 export interface PNPLC {
-  id: number;
+  id: string;
   ts: Date;
   col3: number;
   col4: number;

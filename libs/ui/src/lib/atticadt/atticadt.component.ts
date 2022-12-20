@@ -44,6 +44,9 @@ export class AtticadtComponent implements OnInit {
       case 'plant-nursery':
         this.service.nursery();
         break;
+      case 'eydap-apn':
+        this.dialog.openDialog('eydap-analyses-a-p-n');
+        break;
       default:
         break;
     }

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>
+  <div class="flex flex-col text-center">
+    <div>ΕΥΔΑΠ Quality Analysis</div>
+    <div class="text-lg">Athens Plant Nursery SM unit</div>
+    <div class="text-sm">{{ today | date: 'longDate' }}</div>
+  </div>
+</h1>
+
+<div mat-dialog-content>
+  <uwmh-eydap-analyses-apn-form
+    (analysis)="onAnalysis($event)"
+  ></uwmh-eydap-analyses-apn-form>
+</div>

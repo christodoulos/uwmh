@@ -7,12 +7,8 @@ import {
   Output,
 } from '@angular/core';
 import { LngLatBoundsLike, LngLatLike, Map } from 'mapbox-gl';
-import { MatDialog } from '@angular/material/dialog';
-import {
-  LayerToggleComponent,
-  DrawnGeoJsonComponent,
-  DTDialogService,
-} from '@uwmh/dialog';
+
+import { DTDialogService } from '@uwmh/dialog';
 import { LayersRepository, DrawnFeaturesRepository } from '@uwmh/state';
 import { DTMapService } from '../map.service';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw';

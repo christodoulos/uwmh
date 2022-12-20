@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { EYDAP_APN_DTO } from '@uwmh/state';
 import { NurseryService } from './nursery.service';
 
 @Controller('nursery')
@@ -25,5 +26,10 @@ export class NurseryController {
   @Get('plc/latest')
   async plc_get_latest() {
     return await this.service.plc_get_latest();
+  }
+
+  @Post('eydap')
+  async eydap_apn_analysis_write(@Body() body: EYDAP_APN_DTO) {
+    return await this.service.eydap_apn_analysis_write(body);
   }
 }

@@ -11,8 +11,7 @@ import {
 import { ThreejsLayer } from './helpers';
 import { mapQuery } from './helpers/map.query0';
 import { debounce } from 'lodash-es';
-import { MatDialog } from '@angular/material/dialog';
-import { DTDialogService, MapInfoComponent } from '@uwmh/dialog';
+import { DTDialogService } from '@uwmh/dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +27,6 @@ export class DTMapService {
     private sources: SourcesRepository,
     private layers: LayersRepository,
     private mapwhere: MapWhereRepository,
-    // private dialog: MatDialog
     private dialog: DTDialogService
   ) {
     this.type$.subscribe((data) => {
