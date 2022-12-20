@@ -5,7 +5,10 @@
   </div>
 </h1>
 
-<mat-tab-group>
+<mat-tab-group
+  [selectedIndex]="selected.value"
+  (selectedIndexChange)="selected.setValue($event)"
+>
   <mat-tab label="New Analysis">
     <p class="text-center">{{ today | date: 'longDate' }}</p>
     <uwmh-eydap-analyses-apn-form

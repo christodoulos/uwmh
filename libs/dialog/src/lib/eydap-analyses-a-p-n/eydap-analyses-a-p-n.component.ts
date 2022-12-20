@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { EYDAP_APN, EYDAP_APN_ANALYSES_Entities } from '@uwmh/state';
 
 @Component({
@@ -9,6 +10,7 @@ import { EYDAP_APN, EYDAP_APN_ANALYSES_Entities } from '@uwmh/state';
 })
 export class EydapAnalysesAPNDialogComponent implements OnInit {
   today = new Date();
+  selected = new FormControl(0);
   constructor(private analyses: EYDAP_APN_ANALYSES_Entities) {}
 
   ngOnInit(): void {
@@ -16,7 +18,9 @@ export class EydapAnalysesAPNDialogComponent implements OnInit {
   }
 
   onAnalysis(analysis: EYDAP_APN) {
-    console.log(analysis);
+    console.log('OOAOAOAOA', analysis, this.selected.value);
     this.analyses.addAnalysis(analysis);
+    if (this.selected.value != null)
+      this.selected.setValue(this.selected.value + 1);
   }
 }
