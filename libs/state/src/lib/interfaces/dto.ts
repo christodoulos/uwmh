@@ -7,6 +7,7 @@ export class UserDTO {
   email!: string;
   picture?: string;
   linkedin?: string;
+  claims?: string[];
 }
 
 export class EYDAP_APN_DTO {

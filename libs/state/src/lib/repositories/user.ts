@@ -12,6 +12,7 @@ const user = createStore(
     picture: '',
     provider: '',
     providerId: '',
+    claims: [],
   })
 );
 
@@ -20,6 +21,7 @@ export class UserRepository {
   name$ = user.pipe(select((state) => state.name));
   email$ = user.pipe(select((state) => state.email));
   picture$ = user.pipe(select((state) => state.picture));
+  eydap$ = user.pipe(select((state) => state.claims?.includes('eydap')));
   isLoggedIn$ = user.pipe(select((state) => (state.email ? true : false)));
 
   updateUser(data: UserDTO) {

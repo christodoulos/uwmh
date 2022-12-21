@@ -15,6 +15,7 @@ import { UserRepository } from '@uwmh/state';
 export class AvatarMenuComponent {
   constructor(private user: UserRepository) {}
   username$ = this.user.name$;
+  eydap$ = this.user.eydap$;
   userPicture$ = this.user.picture$;
   @Output() menuSelection = new EventEmitter<string>();
 
@@ -24,5 +25,9 @@ export class AvatarMenuComponent {
 
   notimplemented() {
     alert('Not Implemented Yet!');
+  }
+
+  checkClaim(claims: string[], claim: string) {
+    return claims.includes(claim);
   }
 }

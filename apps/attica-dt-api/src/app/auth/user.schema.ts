@@ -28,6 +28,8 @@ export class User {
   picture: string;
   @Prop()
   linkedin: string;
+  @Prop({ default: [] })
+  claims: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
