@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EYDAP_APN, EYDAP_APN_ANALYSES_Entities } from '@uwmh/state';
 
@@ -8,19 +18,37 @@ import { EYDAP_APN, EYDAP_APN_ANALYSES_Entities } from '@uwmh/state';
   styleUrls: ['./eydap-apn.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EydapApnComponent implements OnInit {
+export class EydapApnComponent implements OnDestroy, AfterViewInit {
   constructor(private eydap_apn: EYDAP_APN_ANALYSES_Entities) {}
-  dataSource = new MatTableDataSource<EYDAP_APN>();
-  displayedColumns: string[] = ['timestamp', 'turbidity'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @Output() editRow = new EventEmitter<EYDAP_APN>();
   entities$ = this.eydap_apn.allEntities$;
-  entities: EYDAP_APN[] = [];
+  dataSource = new MatTableDataSource<EYDAP_APN>();
+  subscription = this.entities$.subscribe((entities) => {
+    this.dataSource.data = entities;
+  });
+  displayedColumns: string[] = [
+    'timestamp',
+    'total_suspended_solids',
+    'biochemical_oxygen_demand',
+    'total_nitrogen',
+    'ammonium',
+    'turbidity',
+    'total_carbon',
+    'electric_conductivity',
+  ];
 
-  ngOnInit(): void {
-    this.eydap_apn.getAnalyses();
-    this.entities$.subscribe((entities) => {
-      console.log('LLLLLLLLLLL', entities);
-      this.dataSource.data = entities;
-      this.entities = entities;
-    });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  onClick(row: EYDAP_APN) {
+    this.editRow.emit(row);
   }
 }

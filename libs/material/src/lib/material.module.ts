@@ -19,28 +19,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
-  // imports: [
-  //   CommonModule,
-  //   MatInputModule,
-  //   MatCardModule,
-  //   MatButtonModule,
-  //   MatButtonToggleModule,
-  //   MatSidenavModule,
-  //   MatListModule,
-  //   MatIconModule,
-  //   MatToolbarModule,
-  //   MatProgressSpinnerModule,
-  //   MatMenuModule,
-  //   MatTableModule,
-  //   MatPaginatorModule,
-  //   MatSortModule,
-  //   MatSelectModule,
-  //   MatDialogModule,
-  //   MatSlideToggleModule,
-  //   MatTabsModule,
-  // ],
   exports: [
     MatInputModule,
     MatCardModule,
@@ -60,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatTabsModule,
     MatTooltipModule,
+    MatGridListModule,
   ],
 })
 export class MaterialModule {}

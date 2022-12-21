@@ -10,11 +10,31 @@
   (selectedIndexChange)="selected.setValue($event)"
 >
   <mat-tab label="New Analysis">
-    <p class="text-center">{{ today | date: 'longDate' }}</p>
-    <uwmh-eydap-analyses-apn-form
-      (analysis)="onAnalysis($event)"
-    ></uwmh-eydap-analyses-apn-form>
+    <p class="text-center text-lg">
+      New analysis on {{ today | date: 'longDate' }}
+    </p>
+    <div class="w-full flex justify-center">
+      <uwmh-eydap-analyses-apn-form
+        (analysis)="onAnalysis($event)"
+      ></uwmh-eydap-analyses-apn-form>
+    </div>
   </mat-tab>
 
-  <mat-tab label="All Analyses"> <uwmh-eydap-apn></uwmh-eydap-apn> </mat-tab>
+  <mat-tab label="All Analyses">
+    <uwmh-eydap-apn (editRow)="onEditRow($event)"></uwmh-eydap-apn>
+  </mat-tab>
+
+  <mat-tab label="Edit Analysis" disabled>
+    <p class="text-center text-lg">
+      Editing analysis of {{ edit_analysis?.timestamp | date: 'short' }}
+    </p>
+    <div class="w-full flex justify-center">
+      <uwmh-eydap-analyses-apn-form
+        [analysis_input]="edit_analysis"
+        (analysis)="onEditAnalysis($event)"
+      ></uwmh-eydap-analyses-apn-form>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Chart"></mat-tab>
 </mat-tab-group>

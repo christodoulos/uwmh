@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { EYDAP_APN_DTO } from '@uwmh/state';
 import { NurseryService } from './nursery.service';
 
@@ -35,7 +35,11 @@ export class NurseryController {
 
   @Post('eydap')
   async eydap_apn_analysis_write(@Body() body: { data: EYDAP_APN_DTO }) {
-    console.log(body);
     return await this.service.eydap_apn_analysis_write(body.data);
+  }
+
+  @Put('eydap')
+  async eydap_apn_analysis_update(@Body() body: { data: EYDAP_APN_DTO }) {
+    return await this.service.eydap_apn_analysis_update(body.data);
   }
 }

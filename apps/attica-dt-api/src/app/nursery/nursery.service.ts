@@ -44,6 +44,14 @@ export class NurseryService {
 
   // EYDAP Analyses
 
+  async eydap_apn_analysis_update(analysis: EYDAP_APN_DTO): Promise<EYDAP_APN> {
+    return this.eydapAPNModel.findOneAndUpdate(
+      { timestamp: analysis.timestamp },
+      analysis,
+      { upsert: true }
+    );
+  }
+
   async eydap_apn_analysis_write(analysis: EYDAP_APN_DTO): Promise<EYDAP_APN> {
     return this.eydapAPNModel.create(analysis);
   }

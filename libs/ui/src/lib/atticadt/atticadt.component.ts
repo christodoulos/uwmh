@@ -45,7 +45,7 @@ export class AtticadtComponent implements OnInit {
         this.service.nursery();
         break;
       case 'eydap-apn':
-        this.dialog.openDialog('eydap-analyses-a-p-n');
+        this.eydap_analyses();
         break;
       default:
         break;
@@ -56,5 +56,15 @@ export class AtticadtComponent implements OnInit {
     const user = getStore('user');
     user?.reset();
     localStorage.removeItem('access_token');
+  }
+
+  eydap_analyses() {
+    const ref = this.dialog.openDialog('eydap-analyses-a-p-n');
+    ref.then((dialog) =>
+      dialog.afterClosed().subscribe(() => {
+        const eydap = getStore('eydap-apn-analyses');
+        eydap?.reset();
+      })
+    );
   }
 }

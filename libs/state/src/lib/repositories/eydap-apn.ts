@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createStore } from '@ngneat/elf';
 import {
   withEntities,
-  setEntities,
+  updateEntities,
   selectAllEntities,
   addEntities,
 } from '@ngneat/elf-entities';
@@ -21,7 +21,6 @@ export class EYDAP_APN_ANALYSES_Entities {
 
   async getAnalyses() {
     this.backend.getEYDAPAPNAnalyses().subscribe((values) => {
-      console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOO', values);
       store.update(addEntities(values));
     });
   }
@@ -29,6 +28,15 @@ export class EYDAP_APN_ANALYSES_Entities {
   async addAnalysis(analysis: EYDAP_APN) {
     this.backend.writeEYDAPAnalysis(analysis).subscribe((value) => {
       store.update(addEntities(value));
+    });
+  }
+
+  async updateAnalysis(analysis: EYDAP_APN) {
+    this.backend.updateEYDAPAnalysis(analysis).subscribe((value) => {
+      store.update(
+        // BE CAREFUL: value is the document before update
+        updateEntities(value.id, (entity) => ({ ...entity, ...analysis }))
+      );
     });
   }
 }
