@@ -67,6 +67,20 @@ export class UIService {
     });
   }
 
+  ellinikon() {
+    this.layers.hide_layer('attica-region-boundary-line');
+    this.layers.hide_layer('attica-region-boundary-fill');
+    this.layers.hide_layer('attica-perfecture-rivers');
+    this.map.value.flyTo({
+      center: [23.737424139872843, 37.8787690569185],
+      zoom: 17,
+      bearing: 45,
+      pitch: 75,
+      duration: 5000,
+      essential: true,
+    });
+  }
+
   logout() {
     const user = getStore('user');
     user?.reset();

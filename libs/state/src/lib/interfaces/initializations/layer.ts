@@ -79,4 +79,14 @@ export const LayersInit: MapLayers = {
     modelUrl: '/assets/portara.glb',
     layout_visibility: true,
   },
+  // Hellinikon
+  'custom-hellinikon': {
+    id: 'custom-hellinikon',
+    modelOrigin: {
+      type: 'Point',
+      coordinates: [23.737424139872843, 37.8787690569185],
+    },
+    modelUrl: '/assets/test0.glb',
+    layout_visibility: true,
+  },
 };

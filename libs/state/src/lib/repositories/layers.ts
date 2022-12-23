@@ -19,6 +19,7 @@ export class LayersRepository {
   attica_rivers$ = layers.pipe(select((state) => state['attica-perfecture-rivers']));
   athens_plant_nurcery$ = layers.pipe( select((state) => state['custom-athens-plant-nursery']) );
   portara$ = layers.pipe(select(state=>state['custom-portara']))
+  ellinikon$ = layers.pipe(select(state=>state['custom-hellinikon']))
   geojson_layers$ = ObservableOf([
     this.attica_boundary_line$,
     this.attica_boundary_fill$,
@@ -26,7 +27,8 @@ export class LayersRepository {
   ]);
   custom_3d_layers$ = ObservableOf([
     this.athens_plant_nurcery$,
-    this.portara$
+    this.portara$,
+    this.ellinikon$
   ])
   
   layer_visibility_change$ = new BehaviorSubject(uuidv4())

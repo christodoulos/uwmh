@@ -44,6 +44,9 @@ export class AtticadtComponent implements OnInit {
       case 'plant-nursery':
         this.service.nursery();
         break;
+      case 'ellinikon':
+        this.service.ellinikon();
+        break;
       case 'eydap-apn':
         this.eydap_analyses();
         break;

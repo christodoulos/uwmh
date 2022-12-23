@@ -26,4 +26,5 @@ export interface MapLayers {
   'attica-perfecture-rivers': Layer;
   'custom-athens-plant-nursery': Custom3DModelLayer;
   'custom-portara': Custom3DModelLayer;
+  'custom-hellinikon': Custom3DModelLayer;
 }
